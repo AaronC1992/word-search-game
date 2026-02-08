@@ -93,9 +93,9 @@ class WinScreenUI {
             }
         }
 
-        // Show/hide next level button
+        // Show/hide next level button (always show for campaign - unlimited levels)
         const nextBtn = document.getElementById('next-level-btn');
-        if (gameManager.currentGameMode === 'campaign' && gameManager.currentLevelNumber < 10) {
+        if (gameManager.currentGameMode === 'campaign') {
             nextBtn.style.display = 'block';
         } else {
             nextBtn.style.display = 'none';
@@ -130,17 +130,15 @@ class WinScreenUI {
     }
 
     /**
-     * Proceed to next level (campaign only)
+     * Proceed to next level (campaign - unlimited levels)
      */
     nextLevel() {
         const gameManager = window.app.gameManager;
         const nextLevelNumber = gameManager.currentLevelNumber + 1;
 
-        if (nextLevelNumber <= 10) {
-            this.hide();
-            gameManager.startCampaignLevel(nextLevelNumber);
-            window.app.showGameplay();
-        }
+        this.hide();
+        gameManager.startCampaignLevel(nextLevelNumber);
+        window.app.showGameplay();
     }
 
     /**

@@ -37,13 +37,7 @@ class SaveSystem {
         // Return default save data
         return {
             currentCampaignLevel: 1,
-            campaignProgress: Array(10).fill().map((_, i) => ({
-                levelNumber: i + 1,
-                unlocked: i === 0,
-                completed: false,
-                bestTime: 0,
-                stars: 0
-            })),
+            campaignProgress: [], // Unlimited levels - track completed levels only
             tutorialCompleted: false,
             totalPlayTime: 0,
             quickPlayStats: {
@@ -150,39 +144,41 @@ class SaveSystem {
 
     /**
      * Update campaign progress for a level
-     * @param {number} levelNumber - Level number (1-10)
+     * @param {number} levelNumber - Level number (unlimited)
      * @param {number} completionTime - Time taken in seconds
      */
     static updateCampaignProgress(levelNumber, completionTime) {
         const saveData = this.loadGame();
-        const levelIndex = levelNumber - 1;
-
-        if (levelIndex >= 0 && levelIndex < saveData.campaignProgress.length) {
-            const levelData = saveData.campaignProgress[levelIndex];
-
-            // Mark as completed
-            levelData.completed = true;
-
-            // Update best time
-            if (levelData.bestTime === 0 || completionTime < levelData.bestTime) {
-                levelData.bestTime = completionTime;
-            }
-
-            // Calculate stars (simple formula)
-            if (completionTime < 60) levelData.stars = 3;
-            else if (completionTime < 120) levelData.stars = 2;
-            else levelData.stars = 1;
-
-            // Unlock next level
-            if (levelIndex < 9) {
-                saveData.campaignProgress[levelIndex + 1].unlocked = true;
-            }
-
-            // Update current level
-            saveData.currentCampaignLevel = Math.min(10, levelNumber + 1);
-
-            this.saveGame(saveData);
+        
+        // Find or create level progress entry
+        let levelData = saveData.campaignProgress.find(l => l.levelNumber === levelNumber);
+        if (!levelData) {
+            levelData = {
+                levelNumber: levelNumber,
+                completed: false,
+                bestTime: 0,
+                stars: 0
+            };
+            saveData.campaignProgress.push(levelData);
         }
+
+        // Mark as completed
+        levelData.completed = true;
+
+        // Update best time
+        if (levelData.bestTime === 0 || completionTime < levelData.bestTime) {
+            levelData.bestTime = completionTime;
+        }
+
+        // Calculate stars (simple formula)
+        if (completionTime < 60) levelData.stars = 3;
+        else if (completionTime < 120) levelData.stars = 2;
+        else levelData.stars = 1;
+
+        // Update current level to next level
+        saveData.currentCampaignLevel = levelNumber + 1;
+
+        this.saveGame(saveData);
     }
 
     /**

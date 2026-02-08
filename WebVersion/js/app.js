@@ -42,10 +42,44 @@ class WordSearchApp {
         this.winScreenUI = new WinScreenUI();
         this.settingsUI = new SettingsUI();
 
+        // Check fullscreen setting and request if enabled
+        this.checkFullscreenSetting();
+
         // Show main menu
         this.showMainMenu();
 
         console.log('Word Search Game - Ready!');
+    }
+
+    /**
+     * Check and apply fullscreen setting
+     */
+    checkFullscreenSetting() {
+        const settings = SaveSystem.loadSettings();
+        if (settings.fullscreenEnabled !== false) {
+            // Use a slight delay to ensure user interaction
+            document.addEventListener('click', () => {
+                if (!document.fullscreenElement) {
+                    this.requestFullscreen();
+                }
+            }, { once: true });
+        }
+    }
+
+    /**
+     * Request fullscreen mode
+     */
+    requestFullscreen() {
+        const elem = document.documentElement;
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen().catch(err => {
+                console.log('Fullscreen request failed:', err);
+            });
+        } else if (elem.webkitRequestFullscreen) {
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+            elem.msRequestFullscreen();
+        }
     }
 
     /**

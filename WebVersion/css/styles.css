@@ -403,8 +403,10 @@ h3 {
     gap: 2px;
     user-select: none;
     touch-action: none;
-    max-width: 100%;
-    width: fit-content;
+    width: min(85vh, 85vw);
+    height: min(85vh, 85vw);
+    max-width: 800px;
+    max-height: 800px;
     margin: 0 auto;
     overflow: visible;
     place-self: center;
@@ -418,13 +420,13 @@ h3 {
     background: #ecf0f1;
     border: 2px solid #bdc3c7;
     border-radius: 8px;
-    font-size: clamp(0.6em, 0.9em, 1.3vmin);
+    font-size: 65%;
     font-weight: bold;
     color: var(--dark-bg);
     cursor: pointer;
     transition: all 0.2s ease;
-    width: var(--cell-size, clamp(12px, 3.2vmin, 36px));
-    height: var(--cell-size, clamp(12px, 3.2vmin, 36px));
+    width: 100%;
+    height: 100%;
 }
 
 .grid-cell:hover {
@@ -792,10 +794,14 @@ h3 {
         max-height: 100%;
     }
     
+    .word-grid {
+        width: min(80vh, 80vw);
+        height: min(80vh, 80vw);
+    }
+    
     .grid-cell {
-        font-size: clamp(0.55em, 0.85em, 1.2vmin);
-        width: var(--cell-size, clamp(12px, 3vmin, 32px));
-        height: var(--cell-size, clamp(12px, 3vmin, 32px));
+        font-size: 60%;
+        border-radius: 6px;
     }
 }
 
@@ -848,12 +854,12 @@ h3 {
     
     .word-grid {
         gap: 2px;
+        width: min(75vh, 75vw);
+        height: min(75vh, 75vw);
     }
     
     .grid-cell {
-        font-size: clamp(0.5em, 0.75em, 1.1vmin);
-        width: var(--cell-size, clamp(12px, 2.8vmin, 30px));
-        height: var(--cell-size, clamp(12px, 2.8vmin, 30px));
+        font-size: 58%;
         border-radius: 4px;
     }
     
@@ -908,13 +914,13 @@ h3 {
     }
     
     .word-grid {
-        gap: 2px;
+        gap: 1px;
+        width: min(70vh, 85vw);
+        height: min(70vh, 85vw);
     }
     
     .grid-cell {
-        font-size: clamp(0.45em, 0.7em, 1vmin);
-        width: var(--cell-size, clamp(11px, 2.6vmin, 28px));
-        height: var(--cell-size, clamp(11px, 2.6vmin, 28px));
+        font-size: 55%;
         border-width: 1px;
         border-radius: 3px;
     }

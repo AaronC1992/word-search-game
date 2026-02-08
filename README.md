@@ -1,6 +1,6 @@
 # 🔤 Word Search Game
 
-**[🎮 Play Now](https://aaronc1992.github.io/word-search-game/WebVersion/)**
+**[🎮 Play Now](https://aaronc1992.github.io/word-search-game/WebVersion/index.html)**
 
 A complete browser-based Word Search game with Campaign, Quick Play, and Two Player modes.
 
@@ -141,5 +141,5 @@ This is a portfolio project. Feel free to fork and customize for your own use!
 
 ---
 
-**[🎮 Start Playing Now](https://aaronc1992.github.io/word-search-game/WebVersion/)**
+**[🎮 Start Playing Now](https://aaronc1992.github.io/word-search-game/WebVersion/index.html)**
 

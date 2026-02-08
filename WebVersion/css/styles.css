@@ -44,6 +44,14 @@ body {
     align-items: center;
 }
 
+#gameplay-screen.screen.active {
+    align-items: stretch;
+}
+
+#gameplay-screen {
+    overflow: hidden;
+}
+
 .screen.overlay {
     position: fixed;
     top: 0;
@@ -343,6 +351,10 @@ h3 {
     max-width: 1200px;
     margin: 0 auto;
     padding: 15px;
+    height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .top-bar {
@@ -352,7 +364,7 @@ h3 {
     background: white;
     padding: 15px 25px;
     border-radius: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -366,20 +378,23 @@ h3 {
     display: grid;
     grid-template-columns: 1fr 280px;
     gap: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    flex: 1;
+    min-height: 0;
 }
 
 /* ===== Word Search Grid ===== */
 .grid-wrapper {
     background: white;
     border-radius: 10px;
-    padding: 20px;
+    padding: 16px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: visible;
     min-height: auto;
+    max-height: 100%;
 }
 
 .word-grid {
@@ -402,13 +417,13 @@ h3 {
     background: #ecf0f1;
     border: 2px solid #bdc3c7;
     border-radius: 8px;
-    font-size: clamp(0.6em, 0.9em, 1.3vw);
+    font-size: clamp(0.55em, 0.85em, 1.2vw);
     font-weight: bold;
     color: var(--dark-bg);
     cursor: pointer;
     transition: all 0.2s ease;
-    width: clamp(18px, 5.5vw, 40px);
-    height: clamp(18px, 5.5vw, 40px);
+    width: clamp(16px, 5vw, 36px);
+    height: clamp(16px, 5vw, 36px);
 }
 
 .grid-cell:hover {
@@ -571,8 +586,9 @@ h3 {
     padding: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
-    max-height: 65vh;
+    max-height: 100%;
     min-height: 200px;
+    height: 100%;
 }
 
 /* Hide scrollbars while maintaining scroll functionality */
@@ -622,7 +638,7 @@ h3 {
     justify-content: center;
     gap: 15px;
     background: white;
-    padding: 15px;
+    padding: 12px;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -772,13 +788,13 @@ h3 {
     }
     
     .word-list-panel {
-        max-height: 55vh;
+        max-height: 100%;
     }
     
     .grid-cell {
-        font-size: clamp(0.5em, 0.8em, 1.1vw);
-        width: clamp(18px, 5.5vw, 40px);
-        height: clamp(18px, 5.5vw, 40px);
+        font-size: clamp(0.5em, 0.75em, 1vw);
+        width: clamp(16px, 4.6vw, 34px);
+        height: clamp(16px, 4.6vw, 34px);
     }
 }
 
@@ -821,7 +837,7 @@ h3 {
     }
     
     .word-list-panel {
-        max-height: 50vh;
+        max-height: 100%;
     }
     
     .grid-wrapper {
@@ -834,9 +850,9 @@ h3 {
     }
     
     .grid-cell {
-        font-size: clamp(0.5em, 0.75em, 1.1vw);
-        width: clamp(18px, 5vw, 40px);
-        height: clamp(18px, 5vw, 40px);
+        font-size: clamp(0.5em, 0.7em, 1vw);
+        width: clamp(16px, 4.6vw, 34px);
+        height: clamp(16px, 4.6vw, 34px);
         border-radius: 4px;
     }
     
@@ -871,6 +887,7 @@ h3 {
     
     .game-container {
         padding: 10px;
+        height: calc(100vh - 20px);
     }
     
     .game-content {
@@ -879,7 +896,7 @@ h3 {
     }
     
     .word-list-panel {
-        max-height: 40vh;
+        max-height: 35vh;
         order: -1;
     }
     
@@ -895,8 +912,8 @@ h3 {
     
     .grid-cell {
         font-size: clamp(0.45em, 0.65em, 1vw);
-        width: clamp(16px, 4.5vw, 35px);
-        height: clamp(16px, 4.5vw, 35px);
+        width: clamp(15px, 4.3vw, 32px);
+        height: clamp(15px, 4.3vw, 32px);
         border-width: 1px;
         border-radius: 3px;
     }

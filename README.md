@@ -20,7 +20,7 @@ A complete browser-based Word Search game with Campaign, Quick Play, and Two Pla
 - Auto-save progress with LocalStorage
 - Resume exactly where you left off
 - Persistent level completion tracking
-- Settings persistence (sound, timer)
+- Settings persistence (sound, timer, optional fullscreen)
 - Reset all progress option
 
 ### 🎯 **Core Gameplay**
@@ -30,6 +30,7 @@ A complete browser-based Word Search game with Campaign, Quick Play, and Two Pla
 - Live selection highlighting
 - Found word highlighting and strike-through
 - Timer tracking (optional toggles)
+- Responsive layout that scales the grid and word list to fit the screen
 - Grid sizes from 6×6 to 30×30
 - Up to 50 words per puzzle
 

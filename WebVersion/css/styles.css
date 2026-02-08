@@ -378,8 +378,8 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: hidden;
-    max-height: 75vh;
+    overflow: visible;
+    min-height: auto;
 }
 
 .word-grid {
@@ -390,6 +390,7 @@ h3 {
     max-width: 100%;
     width: fit-content;
     margin: 0 auto;
+    overflow: visible;
 }
 
 .grid-cell {
@@ -569,7 +570,16 @@ h3 {
     padding: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
-    max-height: 600px;
+    max-height: 500px;
+}
+
+/* Hide scrollbars while maintaining scroll functionality */
+.word-list-panel::-webkit-scrollbar {
+    width: 0;
+}
+.word-list-panel {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 .word-list {
@@ -760,14 +770,14 @@ h3 {
     }
     
     .word-list-panel {
-        max-height: 300px;
+        max-height: 250px;
     }
 }
 
 /* Mobile landscape orientation */
 @media (max-height: 600px) and (orientation: landscape) {
     .grid-wrapper {
-        max-height: 80vh;
+        overflow: visible;
     }
     
     .game-content {
@@ -799,7 +809,7 @@ h3 {
     
     .grid-wrapper {
         padding: 10px;
-        max-height: 65vh;
+        overflow: visible;
     }
     
     .word-grid {
@@ -849,7 +859,7 @@ h3 {
     .grid-wrapper {
         padding: 8px;
         border-radius: 5px;
-        max-height: 60vh;
+        overflow: visible;
     }
     
     .word-grid {

@@ -82,7 +82,8 @@ class GameplayUI {
         this.setupInput();
 
         // Setup callbacks
-        gameManager.onWordFound = (word, playerNumber) => this.onWordFound(word, playerNumber);
+        gameManager.onWordFound = (word, playerNumber, isBonus, cells) => this.onWordFound(word, playerNumber, isBonus, cells);
+        gameManager.onBonusAlreadyFound = (word) => this.showMessage('Already found!', 'warning');
         gameManager.onPuzzleComplete = (stats) => this.onPuzzleComplete(stats);
         gameManager.onPlayerSelectNeeded = () => this.showPlayerModal();
 
@@ -191,7 +192,7 @@ class GameplayUI {
      * @param {number} playerNumber - Player number (for two player mode)
      * @param {boolean} isBonus - Whether this is a bonus word
      */
-    onWordFound(word, playerNumber, isBonus = false) {
+    onWordFound(word, playerNumber, isBonus = false, cells = null) {
         if (isBonus) {
             // Highlight bonus word cells in gold
             const gameManager = window.app.gameManager;
@@ -205,6 +206,10 @@ class GameplayUI {
                         cellElement.classList.add('bonus-found');
                     }
                 });
+                
+                // Create sparkle effects and popup
+                this.createBonusEffects(placement.coordinates);
+                this.showBonusPopup();
             }
         } else {
             // Mark regular word in list
@@ -363,5 +368,94 @@ class GameplayUI {
     hide() {
         this.stopTimerUpdate();
         this.screen.classList.remove('active');
+    }
+
+    /**
+     * Create sparkle effects for bonus word
+     * @param {Array} coordinates - Word coordinates
+     */
+    createBonusEffects(coordinates) {
+        coordinates.forEach((coord, index) => {
+            setTimeout(() => {
+                const cellElement = this.getCellElement(coord.x, coord.y);
+                if (!cellElement) return;
+
+                const rect = cellElement.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+
+                // Create multiple sparkles per cell
+                for (let i = 0; i < 5; i++) {
+                    setTimeout(() => {
+                        this.createSparkle(centerX, centerY);
+                    }, i * 50);
+                }
+            }, index * 100);
+        });
+    }
+
+    /**
+     * Create a single sparkle particle
+     * @param {number} x - X position
+     * @param {number} y - Y position
+     */
+    createSparkle(x, y) {
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle';
+        
+        // Random angle and distance
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 50 + Math.random() * 100;
+        const endX = x + Math.cos(angle) * distance;
+        const endY = y + Math.sin(angle) * distance;
+        
+        sparkle.style.left = x + 'px';
+        sparkle.style.top = y + 'px';
+        sparkle.style.setProperty('--end-x', endX + 'px');
+        sparkle.style.setProperty('--end-y', endY + 'px');
+        
+        document.body.appendChild(sparkle);
+        
+        // Remove after animation
+        setTimeout(() => sparkle.remove(), 1000);
+    }
+
+    /**
+     * Show bonus word popup
+     */
+    showBonusPopup() {
+        const popup = document.createElement('div');
+        popup.className = 'bonus-popup';
+        popup.textContent = 'BONUS WORD!';
+        
+        document.body.appendChild(popup);
+        
+        // Trigger animation
+        setTimeout(() => popup.classList.add('show'), 10);
+        
+        // Remove after animation
+        setTimeout(() => {
+            popup.classList.remove('show');
+            setTimeout(() => popup.remove(), 300);
+        }, 1500);
+    }
+
+    /**
+     * Show message at bottom of screen
+     * @param {string} text - Message text
+     * @param {string} type - Message type (info, warning, success)
+     */
+    showMessage(text, type = 'info') {
+        const messageEl = document.getElementById('game-message');
+        if (!messageEl) return;
+        
+        messageEl.textContent = text;
+        messageEl.className = 'game-message ' + type;
+        messageEl.classList.add('show');
+        
+        // Auto hide after 2 seconds
+        setTimeout(() => {
+            messageEl.classList.remove('show');
+        }, 2000);
     }
 }

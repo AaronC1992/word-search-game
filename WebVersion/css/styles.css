@@ -445,6 +445,123 @@ h3 {
     font-weight: bold;
 }
 
+/* ===== Bonus Word Effects ===== */
+.sparkle {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: radial-gradient(circle, #FFD700, #FFA500);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    box-shadow: 0 0 10px #FFD700, 0 0 20px #FFA500;
+    animation: sparkleShoot 1s ease-out forwards;
+}
+
+@keyframes sparkleShoot {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(
+            calc(var(--end-x) - 50%), 
+            calc(var(--end-y) - 50%)
+        ) scale(1.5);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(
+            var(--end-x), 
+            var(--end-y)
+        ) scale(0);
+        opacity: 0;
+    }
+}
+
+.bonus-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    color: white;
+    padding: 30px 60px;
+    border-radius: 20px;
+    font-size: 3em;
+    font-weight: 900;
+    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 40px rgba(255, 215, 0, 0.6),
+                0 0 60px rgba(255, 165, 0, 0.4);
+    z-index: 10000;
+    pointer-events: none;
+    opacity: 0;
+    letter-spacing: 3px;
+    border: 4px solid #FFB830;
+}
+
+.bonus-popup.show {
+    animation: bonusPopup 1.5s ease-out;
+}
+
+@keyframes bonusPopup {
+    0% {
+        transform: translate(-50%, -50%) scale(0) rotate(-10deg);
+        opacity: 0;
+    }
+    30% {
+        transform: translate(-50%, -50%) scale(1.2) rotate(5deg);
+        opacity: 1;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    70% {
+        transform: translate(-50%, -50%) scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(0.8) rotate(0deg);
+        opacity: 0;
+    }
+}
+
+/* ===== Game Messages ===== */
+.game-message {
+    position: fixed;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 40px;
+    border-radius: 30px;
+    font-size: 1.2em;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 9998;
+    transition: bottom 0.3s ease;
+    white-space: nowrap;
+}
+
+.game-message.show {
+    bottom: 80px;
+}
+
+.game-message.warning {
+    background: linear-gradient(135deg, #FFA500, #FF8C00);
+    color: white;
+}
+
+.game-message.info {
+    background: linear-gradient(135deg, #4A90E2, #357ABD);
+    color: white;
+}
+
+.game-message.success {
+    background: linear-gradient(135deg, #27ae60, #229954);
+    color: white;
+}
+
 /* ===== Word List Panel ===== */
 .word-list-panel {
     background: white;

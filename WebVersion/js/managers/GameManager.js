@@ -198,12 +198,19 @@ class GameManager {
         // Check bonus word placements
         console.log(`📋 Checking ${this.currentPuzzle.bonusWordPlacements.length} bonus words...`);
         for (const placement of this.currentPuzzle.bonusWordPlacements) {
-            if (this.bonusWordsFound.includes(placement.word)) continue;
-
             if (placement.matchesSelection(selectedCells)) {
-                // Found a bonus word
+                // Check if already found
+                if (this.bonusWordsFound.includes(placement.word)) {
+                    console.log(`⚠️ Bonus word "${placement.word}" already found!`);
+                    if (this.onBonusAlreadyFound) {
+                        this.onBonusAlreadyFound(placement.word);
+                    }
+                    return;
+                }
+                
+                // Found a new bonus word
                 console.log(`💰 BONUS MATCH! Found: "${placement.word}"`);
-                this.markBonusWordAsFound(placement.word);
+                this.markBonusWordAsFound(placement.word, selectedCells);
                 return;
             }
         }
@@ -253,13 +260,14 @@ class GameManager {
     /**
      * Mark bonus word as found
      * @param {string} word - Found bonus word
+     * @param {Array} cells - Selected cells
      */
-    markBonusWordAsFound(word) {
+    markBonusWordAsFound(word, cells) {
         if (!this.bonusWordsFound.includes(word)) {
             this.bonusWordsFound.push(word);
 
             if (this.onWordFound) {
-                this.onWordFound(word, null, true); // true indicates bonus word
+                this.onWordFound(word, null, true, cells); // true indicates bonus word
             }
         }
     }

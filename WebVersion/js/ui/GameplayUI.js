@@ -130,8 +130,8 @@ class GameplayUI {
         const firstCell = this.gridContainer.querySelector('.grid-cell');
         if (!firstCell) return;
         const cellSize = firstCell.getBoundingClientRect().width;
-        // Use ~65% of cell width for the font size so letters fill bubbles
-        const fontSize = Math.max(8, cellSize * 0.65);
+        // Use ~55% of cell width for the font size — readable with breathing room
+        const fontSize = Math.max(8, cellSize * 0.55);
         this.gridContainer.style.fontSize = `${fontSize}px`;
     }
 

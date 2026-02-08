@@ -400,7 +400,7 @@ h3 {
 
 .word-grid {
     display: grid;
-    gap: 3px;
+    gap: 4px;
     user-select: none;
     touch-action: none;
     aspect-ratio: 1;
@@ -417,10 +417,11 @@ h3 {
     justify-content: center;
     align-items: center;
     background: #ecf0f1;
-    border: 2px solid #bdc3c7;
-    border-radius: 8px;
+    border: 1px solid #bdc3c7;
+    border-radius: 6px;
     font-weight: bold;
     line-height: 1;
+    letter-spacing: 0.5px;
     color: var(--dark-bg);
     cursor: pointer;
     transition: all 0.2s ease;

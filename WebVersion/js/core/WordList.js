@@ -33,7 +33,26 @@ class WordList {
         // Time & Weather
         "DAY", "WEEK", "YEAR", "DAWN", "DUSK", "NIGHT", "MIST", "FOG", "HAIL", "FROST",
         // Actions
-        "RUN", "JUMP", "SWIM", "WALK", "CLIMB", "LEAP", "DIVE", "SOAR", "GLIDE", "ROLL"
+        "RUN", "JUMP", "SWIM", "WALK", "CLIMB", "LEAP", "DIVE", "SOAR", "GLIDE", "ROLL",
+        // More Animals
+        "WASP", "NEWT", "SHRIMP", "SHARK", "ROOK", "KITE", "HERON", "CRANE", "STORK", "IBIS",
+        "VIPER", "ADDER", "COBRA", "GECKO", "SKUNK", "PUMA", "JAGUAR", "ORCA", "BISON", "YAK",
+        // More Nature
+        "CREEK", "GROVE", "GLADE", "FIELD", "SHORE", "CLIFF", "PEAKS", "DUNE", "OASIS", "DELTA",
+        "FLORA", "FAUNA", "REEDS", "KELP", "LOTUS", "ORCHID", "TULIP", "PANSY", "DAISY", "ASTER",
+        // More Objects
+        "BLADE", "SHAFT", "HILT", "LANCE", "BATON", "CANE", "BASIN", "VASE", "BOWL", "PLATE",
+        "SPOON", "FORK", "KNIFE", "LADLE", "WHISK", "SIEVE", "TONGS", "RACK", "SHELF", "CRATE",
+        "LOCK", "LATCH", "HINGE", "SCREW", "NAIL", "BOLT", "CLAMP", "VICE", "LEVER", "CRANK",
+        // More Materials
+        "BRASS", "STEEL", "STONE", "BRICK", "GLASS", "CHALK", "RESIN", "PITCH", "LATEX", "AMBER",
+        "FLINT", "SLATE", "SHALE", "QUARTZ", "MICA", "TALC", "GYPSUM", "BORAX", "SODA", "LIME",
+        // More Food
+        "SALAD", "GRAVY", "SAUCE", "BROTH", "STOCK", "CREAM", "CRUST", "DOUGH", "BATTER", "ICING",
+        "SUGAR", "SYRUP", "CANDY", "FUDGE", "COCOA", "MOCHA", "LATTE", "BREW", "TOAST", "BAGEL",
+        // Activities & Concepts
+        "GAME", "PLAY", "SPORT", "RACE", "MATCH", "QUEST", "TRIAL", "TEST", "ARTS", "CRAFT",
+        "SKILL", "TRADE", "TOOLS", "IDEAS", "DREAM", "HOPE", "FAITH", "TRUST", "PEACE", "UNITY"
     ];
 
     static mediumWords = [
@@ -87,7 +106,37 @@ class WordList {
         // Fantasy & Magic
         "POTION", "ELIXIR", "CHARM", "SPELL", "RUNE", "GLYPH", "SIGIL", "AMULET",
         "TALISMAN", "ARTIFACT", "PROPHECY", "SORCERY", "ENCHANTMENT", "ILLUSION",
-        "PHANTOM", "SPECTER", "WRAITH", "GOLEM", "GARGOYLE", "CHIMERA", "HYDRA"
+        "PHANTOM", "SPECTER", "WRAITH", "GOLEM", "GARGOYLE", "CHIMERA", "HYDRA",
+        // More Nature & Geography
+        "WETLAND", "WOODLAND", "HIGHLAND", "LOWLAND", "PLATEAU", "RAVINE", "GULLY",
+        "FJORD", "LAGOON", "ESTUARY", "CHANNEL", "STRAIT", "BASIN", "RANGE", "SUMMIT",
+        "FOOTHILL", "HILLSIDE", "SEASIDE", "LAKESIDE", "RIVERSIDE", "SHORELINE",
+        // More Animals
+        "GAZELLE", "ANTELOPE", "BUFFALO", "CARIBOU", "REINDEER", "WALRUS", "MANATEE",
+        "NARWHAL", "HAMSTER", "GERBIL", "GUINEA", "CHINCHILLA", "MEERKAT", "WOMBAT",
+        "VULTURE", "BUZZARD", "KESTREL", "SPARROW", "THRUSH", "WARBLER", "MAGPIE",
+        "BLUEJAY", "CARDINAL", "CANARY", "MACAW", "TOUCAN", "HORNBILL", "HOOPOE",
+        // More Objects & Tools
+        "BUCKET", "BARREL", "CANTEEN", "FLASK", "GOBLET", "CHALICE", "PITCHER",
+        "KETTLE", "CAULDRON", "CRUCIBLE", "MORTAR", "PESTLE", "GRINDER", "CRUSHER",
+        "PLIERS", "WRENCH", "SCRAPER", "SHOVEL", "PICKAXE", "TROWEL", "RAKE",
+        "SICKLE", "SCYTHE", "PITCHFORK", "CROWBAR", "PULLEY", "WINCH", "HOIST",
+        // More Structures
+        "ARCHWAY", "DOORWAY", "HALLWAY", "PATHWAY", "ROADWAY", "STAIRWAY", "GATEWAY",
+        "BALCONY", "TERRACE", "VERANDA", "GAZEBO", "PERGOLA", "ARBOR", "TRELLIS",
+        "PILLAR", "COLUMN", "STATUE", "MONUMENT", "MEMORIAL", "SHRINE", "ALTAR",
+        // More Materials & Substances
+        "ENAMEL", "VARNISH", "LACQUER", "POLISH", "GLAZE", "STAIN", "PIGMENT",
+        "CARBON", "SULFUR", "SILICON", "ALUMINUM", "MERCURY", "ARGON", "NEON",
+        "HELIUM", "RADON", "XENON", "KRYPTON", "NICKEL", "COBALT", "CHROMIUM",
+        // More Food & Drink
+        "MUFFIN", "BISCUIT", "CRACKER", "PRETZEL", "COOKIE", "BROWNIE", "SCONE",
+        "PUDDING", "CUSTARD", "SORBET", "GELATO", "MOUSSE", "TRUFFLE", "CARAMEL",
+        "NOUGAT", "TOFFEE", "PRALINE", "GANACHE", "FONDUE", "CASSEROLE", "LASAGNA",
+        // More Concepts & Qualities
+        "BALANCE", "HARMONY", "RHYTHM", "MELODY", "SYMPHONY", "CHORUS", "ANTHEM",
+        "VICTORY", "TRIUMPH", "GLORY", "VALOR", "BRAVERY", "PROWESS", "STRENGTH",
+        "AGILITY", "STAMINA", "VITALITY", "ENERGY", "ESSENCE", "NATURE", "SPIRIT"
     ];
 
     static longWords = [

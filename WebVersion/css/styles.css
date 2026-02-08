@@ -571,8 +571,8 @@ h3 {
     padding: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
-    max-height: 400px;
-    min-height: 150px;
+    max-height: 65vh;
+    min-height: 200px;
 }
 
 /* Hide scrollbars while maintaining scroll functionality */
@@ -772,7 +772,7 @@ h3 {
     }
     
     .word-list-panel {
-        max-height: 300px;
+        max-height: 55vh;
     }
     
     .grid-cell {
@@ -821,7 +821,7 @@ h3 {
     }
     
     .word-list-panel {
-        max-height: 250px;
+        max-height: 50vh;
     }
     
     .grid-wrapper {
@@ -879,7 +879,7 @@ h3 {
     }
     
     .word-list-panel {
-        max-height: 200px;
+        max-height: 40vh;
         order: -1;
     }
     

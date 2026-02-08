@@ -786,26 +786,9 @@ h3 {
 }
 
 /* ===== Responsive Design ===== */
-@media (max-width: 1024px) {
-    .game-content {
-        grid-template-columns: 1fr 240px;
-    }
-    
-    .word-list-panel {
-        max-height: 100%;
-    }
-    
-    .grid-cell {
-        border-radius: 6px;
-    }
-}
 
-/* Mobile landscape orientation */
-@media (max-height: 600px) and (orientation: landscape) {
-    .grid-wrapper {
-        overflow: hidden;
-    }
-    
+/* Tablet */
+@media (max-width: 1024px) {
     .game-content {
         grid-template-columns: 1fr 220px;
     }
@@ -813,9 +796,125 @@ h3 {
     .word-list-panel {
         max-height: 100%;
     }
+    
+    .grid-cell {
+        border-radius: 5px;
+    }
+    
+    .word-item {
+        padding: 8px;
+        margin-bottom: 6px;
+        font-size: 0.9em;
+    }
 }
 
-@media (max-width: 768px) {
+/* Mobile landscape — side-by-side but compressed */
+@media (max-height: 500px) and (orientation: landscape) {
+    body {
+        overflow: hidden;
+    }
+    
+    .screen {
+        padding: 6px;
+    }
+
+    .game-container {
+        padding: 4px 8px;
+        height: 100dvh;
+        gap: 4px;
+    }
+
+    .top-bar {
+        padding: 4px 10px;
+        border-radius: 6px;
+    }
+    
+    .progress-info, .timer-info {
+        font-size: 0.85em;
+    }
+
+    .game-content {
+        grid-template-columns: 1fr 160px;
+        gap: 6px;
+    }
+
+    .grid-wrapper {
+        padding: 4px;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+
+    .word-grid {
+        gap: 2px;
+    }
+
+    .grid-cell {
+        border-radius: 3px;
+    }
+
+    .word-list-panel {
+        padding: 6px;
+        border-radius: 6px;
+    }
+
+    .word-list-panel h3 {
+        font-size: 0.9em;
+        margin-bottom: 4px;
+    }
+
+    .word-item {
+        padding: 4px 6px;
+        margin-bottom: 3px;
+        font-size: 0.75em;
+    }
+
+    .bottom-controls {
+        padding: 3px 6px;
+        border-radius: 6px;
+        gap: 6px;
+    }
+
+    .control-btn {
+        font-size: 0.8em;
+        padding: 5px 10px;
+    }
+}
+
+/* Larger landscape (tablets rotated) */
+@media (min-height: 501px) and (max-height: 700px) and (orientation: landscape) {
+    .game-container {
+        padding: 6px 12px;
+        height: 100dvh;
+        gap: 6px;
+    }
+
+    .game-content {
+        grid-template-columns: 1fr 200px;
+        gap: 8px;
+    }
+
+    .grid-wrapper {
+        overflow: hidden;
+    }
+
+    .word-item {
+        padding: 6px 8px;
+        margin-bottom: 4px;
+        font-size: 0.85em;
+    }
+
+    .bottom-controls {
+        padding: 4px 8px;
+    }
+    
+    .control-btn {
+        padding: 6px 12px;
+        font-size: 0.85em;
+    }
+}
+
+/* Small tablets and large phones portrait */
+@media (max-width: 768px) and (orientation: portrait) {
     .container {
         padding: 30px 20px;
     }
@@ -834,40 +933,54 @@ h3 {
     }
     
     .game-content {
-        grid-template-columns: 1fr 200px;
-        gap: 12px;
+        grid-template-columns: 1fr;
+        gap: 8px;
     }
     
     .word-list-panel {
-        max-height: 100%;
+        max-height: 20vh;
+        order: 2;
+        min-height: 60px;
     }
     
     .grid-wrapper {
-        padding: 10px;
+        padding: 6px;
         overflow: hidden;
+        min-height: 0;
     }
     
     .word-grid {
-        gap: 2px;
+        gap: 3px;
     }
     
     .grid-cell {
         border-radius: 4px;
     }
     
+    .word-item {
+        display: inline-block;
+        padding: 4px 8px;
+        margin: 2px 4px;
+        font-size: 0.8em;
+    }
+    
     .bottom-controls {
         flex-wrap: wrap;
+        padding: 6px;
     }
     
     .control-btn {
         flex: 1;
-        min-width: 100px;
+        min-width: 90px;
+        padding: 8px;
+        font-size: 0.85em;
     }
 }
 
-@media (max-width: 480px) {
+/* Phones portrait */
+@media (max-width: 480px) and (orientation: portrait) {
     .screen {
-        padding: 10px;
+        padding: 6px;
     }
     
     .container {
@@ -879,44 +992,98 @@ h3 {
     }
     
     .top-bar {
-        flex-direction: column;
-        gap: 10px;
-        padding: 10px 15px;
+        flex-direction: row;
+        gap: 0;
+        padding: 6px 10px;
+        border-radius: 6px;
+    }
+    
+    .progress-info, .timer-info {
+        font-size: 0.85em;
     }
     
     .game-container {
-        padding: 10px;
-        height: calc(100dvh - 16px);
+        padding: 6px;
+        height: calc(100dvh - 12px);
+        gap: 4px;
     }
     
     .game-content {
         grid-template-columns: 1fr;
-        gap: 15px;
+        gap: 6px;
     }
     
     .word-list-panel {
-        max-height: 32vh;
-        order: -1;
+        max-height: 18vh;
+        order: 2;
+        padding: 6px;
+        border-radius: 6px;
+        min-height: 50px;
+    }
+    
+    .word-list-panel h3 {
+        font-size: 0.9em;
+        margin-bottom: 4px;
+    }
+    
+    .word-item {
+        display: inline-block;
+        padding: 3px 6px;
+        margin: 2px 3px;
+        font-size: 0.75em;
+        border-radius: 4px;
     }
     
     .grid-wrapper {
-        padding: 8px;
+        padding: 4px;
         border-radius: 5px;
         overflow: hidden;
     }
     
     .word-grid {
-        gap: 1px;
+        gap: 2px;
     }
     
     .grid-cell {
-        border-width: 1px;
         border-radius: 3px;
     }
     
+    .bottom-controls {
+        padding: 4px;
+        border-radius: 6px;
+        gap: 6px;
+    }
+    
     .control-btn {
-        font-size: 0.9em;
-        padding: 10px;
+        font-size: 0.8em;
+        padding: 6px 10px;
+    }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+    .game-container {
+        padding: 4px;
+        gap: 3px;
+    }
+    
+    .top-bar {
+        padding: 4px 8px;
+    }
+    
+    .word-list-panel {
+        max-height: 15vh;
+    }
+    
+    .word-item {
+        font-size: 0.7em;
+        padding: 2px 5px;
+        margin: 1px 2px;
+    }
+    
+    .control-btn {
+        font-size: 0.75em;
+        padding: 5px 8px;
     }
 }
 

@@ -94,9 +94,13 @@ class GameplayUI {
         // Start timer update loop
         this.startTimerUpdate();
 
-        // Rescale font on window resize
-        this._resizeHandler = () => this.scaleFontToGrid();
+        // Rescale font on window resize and orientation change
+        this._resizeHandler = () => {
+            // Small delay to let CSS reflow after orientation change
+            setTimeout(() => this.scaleFontToGrid(), 100);
+        };
         window.addEventListener('resize', this._resizeHandler);
+        window.addEventListener('orientationchange', this._resizeHandler);
     }
 
     /**

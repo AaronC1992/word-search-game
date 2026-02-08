@@ -133,7 +133,7 @@ class WordSearchGenerator {
             let attempts = 0;
             
             while (!bonusWord && attempts < 20) {
-                const randomWord = WordList.getRandomWords(1, 4, 8, Math.random())[0];
+                const randomWord = WordList.getRandomWords(1, 3, 8, Math.random())[0];
                 if (!existingWords.includes(randomWord.toUpperCase())) {
                     bonusWord = randomWord;
                 }
@@ -198,7 +198,7 @@ class WordSearchGenerator {
      * @param {LevelDefinition} levelDef - Level configuration
      */
     detectCoincidentalBonusWords(puzzle, levelDef) {
-        const minLen = Math.max(4, levelDef.minWordLength || 3);
+        const minLen = Math.max(3, levelDef.minWordLength || 3);
         const maxLen = Math.max(minLen, levelDef.maxWordLength || 12);
         const maxBonus = Math.min(12, Math.floor((puzzle.gridSize * puzzle.gridSize) / 10));
 

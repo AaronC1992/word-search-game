@@ -362,7 +362,7 @@ h3 {
     justify-content: space-between;
     align-items: center;
     background: white;
-    padding: clamp(8px, 1.2vw, 12px) clamp(12px, 2vw, 20px);
+    padding: clamp(6px, 1vw, 10px) clamp(10px, 1.6vw, 18px);
     border-radius: 10px;
     margin-bottom: 0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -388,7 +388,7 @@ h3 {
 .grid-wrapper {
     background: white;
     border-radius: 10px;
-    padding: clamp(8px, 1.4vw, 14px);
+    padding: clamp(6px, 1vmin, 12px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
@@ -400,7 +400,7 @@ h3 {
 
 .word-grid {
     display: grid;
-    gap: 3px;
+    gap: 2px;
     user-select: none;
     touch-action: none;
     max-width: 100%;
@@ -418,13 +418,13 @@ h3 {
     background: #ecf0f1;
     border: 2px solid #bdc3c7;
     border-radius: 8px;
-    font-size: clamp(0.5em, 0.75em, 1.1vw);
+    font-size: clamp(0.4em, 0.65em, 0.9vmin);
     font-weight: bold;
     color: var(--dark-bg);
     cursor: pointer;
     transition: all 0.2s ease;
-    width: clamp(14px, 4.2vw, 34px);
-    height: clamp(14px, 4.2vw, 34px);
+    width: clamp(12px, 2.8vmin, 28px);
+    height: clamp(12px, 2.8vmin, 28px);
 }
 
 .grid-cell:hover {
@@ -584,7 +584,7 @@ h3 {
 .word-list-panel {
     background: white;
     border-radius: 10px;
-    padding: clamp(12px, 1.5vw, 18px);
+    padding: clamp(10px, 1.2vw, 16px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
     max-height: 100%;
@@ -606,11 +606,11 @@ h3 {
 }
 
 .word-item {
-    padding: 12px;
+    padding: 10px;
     margin-bottom: 8px;
     background: #ecf0f1;
     border-radius: 6px;
-    font-size: clamp(0.95em, 1vw, 1.05em);
+    font-size: clamp(0.9em, 0.95vw, 1em);
     font-weight: 500;
     transition: all 0.3s ease;
 }
@@ -637,9 +637,9 @@ h3 {
 .bottom-controls {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 10px;
     background: white;
-    padding: clamp(8px, 1vw, 12px);
+    padding: clamp(6px, 0.8vw, 10px);
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
@@ -793,9 +793,9 @@ h3 {
     }
     
     .grid-cell {
-        font-size: clamp(0.48em, 0.7em, 1vw);
-        width: clamp(14px, 4vw, 32px);
-        height: clamp(14px, 4vw, 32px);
+        font-size: clamp(0.42em, 0.6em, 0.85vmin);
+        width: clamp(12px, 2.6vmin, 26px);
+        height: clamp(12px, 2.6vmin, 26px);
     }
 }
 
@@ -851,9 +851,9 @@ h3 {
     }
     
     .grid-cell {
-        font-size: clamp(0.48em, 0.68em, 0.95vw);
-        width: clamp(14px, 4vw, 32px);
-        height: clamp(14px, 4vw, 32px);
+        font-size: clamp(0.42em, 0.6em, 0.85vmin);
+        width: clamp(12px, 2.6vmin, 26px);
+        height: clamp(12px, 2.6vmin, 26px);
         border-radius: 4px;
     }
     
@@ -912,9 +912,9 @@ h3 {
     }
     
     .grid-cell {
-        font-size: clamp(0.44em, 0.62em, 0.95vw);
-        width: clamp(13px, 3.8vw, 30px);
-        height: clamp(13px, 3.8vw, 30px);
+        font-size: clamp(0.4em, 0.56em, 0.8vmin);
+        width: clamp(11px, 2.4vmin, 24px);
+        height: clamp(11px, 2.4vmin, 24px);
         border-width: 1px;
         border-radius: 3px;
     }

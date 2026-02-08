@@ -12,7 +12,7 @@ A complete browser-based Word Search game with Campaign, Quick Play, and Two Pla
 ## ✨ Features
 
 ### 🎮 **Three Game Modes**
-- **Campaign Mode:** 10 progressive levels with increasing difficulty
+- **Campaign Mode:** Infinite levels with increasing difficulty
 - **Quick Play:** Customizable difficulty (Easy/Medium/Hard) and word count (5-50 words)
 - **Two Player Mode:** Competitive same-screen multiplayer with color-coded highlights
 
@@ -100,7 +100,7 @@ WebVersion/
 ## 🎮 Game Modes
 
 ### Campaign Mode
-- 10 progressively challenging levels
+- Infinite progressively challenging levels
 - Difficulty scales from 6×6 grids (5 words) to larger grids (15+ words)
 - Unlock levels by completing previous ones
 - Saved progress across sessions

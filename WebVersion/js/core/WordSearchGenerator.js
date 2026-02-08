@@ -298,7 +298,10 @@ class WordSearchGenerator {
             {x: -1, y: 0},  // Up
             {x: 1, y: 1},   // Down-Right
             {x: 1, y: -1},  // Down-Left
-     
+            {x: -1, y: 1},  // Up-Right
+            {x: -1, y: -1}  // Up-Left
+        ];
+    }
 
     /**
      * Get direction name for debugging
@@ -316,9 +319,6 @@ class WordSearchGenerator {
         if (x === -1 && y === 1) return 'Up-Right';
         if (x === -1 && y === -1) return 'Up-Left';
         return `(${x},${y})`;
-    }       {x: -1, y: 1},  // Up-Right
-            {x: -1, y: -1}  // Up-Left
-        ];
     }
 
     /**

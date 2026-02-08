@@ -203,9 +203,10 @@ class WordSearchGenerator {
         const maxBonus = Math.min(12, Math.floor((puzzle.gridSize * puzzle.gridSize) / 10));
 
         const { wordSet, prefixSet } = this.buildWordLookup(minLen, maxLen);
-        const existingWords = new Set(
-            [...puzzle.targetWords, ...puzzle.bonusWordPlacements.map(p => p.word)].map(w => w.toUpperCase())
-        );
+        // Words already placed as targets or intentional bonus (skip these strings entirely)
+        const targetWords = new Set(puzzle.targetWords.map(w => w.toUpperCase()));
+        // Track unique word strings found as coincidental bonus (allow same word at different positions)
+        const bonusWordStrings = new Set(puzzle.bonusWordPlacements.map(p => p.word.toUpperCase()));
 
         console.log(`🔍 Scanning for bonus words... Dictionary size: ${wordSet.size}, Min/Max length: ${minLen}/${maxLen}, Max bonus: ${maxBonus}`);
 
@@ -231,10 +232,19 @@ class WordSearchGenerator {
                             break;
                         }
 
-                        if (word.length >= minLen && wordSet.has(word) && !existingWords.has(word)) {
+                        if (word.length >= minLen && wordSet.has(word) && !targetWords.has(word)) {
+                            // Check if this exact placement (position + direction) already exists
+                            const alreadyRegistered = puzzle.bonusWordPlacements.some(p =>
+                                p.word === word && p.startRow === row && p.startCol === col &&
+                                p.direction.x === direction.x && p.direction.y === direction.y
+                            );
+                            if (alreadyRegistered) continue;
+
                             this.registerBonusPlacement(puzzle, word, row, col, direction);
-                            console.log(`✨ Found bonus word: "${word}" at (${row},${col}) going ${this.directionName(direction)}`);
-                            existingWords.add(word);
+                            if (!bonusWordStrings.has(word)) {
+                                console.log(`✨ Found bonus word: "${word}" at (${row},${col}) going ${this.directionName(direction)}`);
+                                bonusWordStrings.add(word);
+                            }
                             added++;
 
                             if (added >= maxBonus) {
@@ -246,7 +256,7 @@ class WordSearchGenerator {
                 }
             }
         }
-        console.log(`✅ Bonus detection complete. Found ${added} bonus words total.`);
+        console.log(`✅ Bonus detection complete. Found ${added} bonus word placements total.`);
     }
 
     /**

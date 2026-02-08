@@ -55,7 +55,8 @@ body {
 /* Main Menu Background */
 #main-menu-screen {
     background: url('../assets/background.png') no-repeat center center fixed;
-    background-size: cover;
+    background-size: contain;
+    background-color: #f5e6d3;
     position: fixed;
     top: 0;
     left: 0;
@@ -64,9 +65,10 @@ body {
 }
 
 /* Widescreen Background */
-@media (min-aspect-ratio: 4/3) {
+@media (min-aspect-ratio: 16/9) {
     #main-menu-screen {
         background-image: url('../assets/background-widescreen.png');
+        background-size: cover;
     }
 }
 
@@ -77,7 +79,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.1);
     z-index: 0;
 }
 
@@ -87,13 +89,14 @@ body {
 }
 
 .container {
-    background: white;
-    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 25px;
     padding: 40px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
     max-width: 600px;
     width: 100%;
     text-align: center;
+    backdrop-filter: blur(10px);
 }
 
 /* ===== Typography ===== */
@@ -126,28 +129,46 @@ h3 {
 }
 
 .menu-btn {
-    background: var(--primary-color);
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
     color: white;
     border: none;
     padding: 15px 40px;
     font-size: 1.1em;
-    border-radius: 10px;
+    border-radius: 15px;
     cursor: pointer;
     transition: all 0.3s ease;
-    font-weight: 600;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    font-weight: 700;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
     width: 100%;
     max-width: 300px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s;
+}
+
+.menu-btn:hover::before {
+    left: 100%;
 }
 
 .menu-btn:hover {
-    background: #357abd;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
 }
 
 .menu-btn:active {
-    transform: translateY(0);
+    transform: translateY(-1px);
 }
 
 .back-btn {

@@ -48,6 +48,11 @@ class SettingsUI {
                 this.exitFullscreen();
             }
         });
+
+        // Monitor fullscreen changes
+        document.addEventListener('fullscreenchange', () => this.updateFullscreenCheckbox());
+        document.addEventListener('webkitfullscreenchange', () => this.updateFullscreenCheckbox());
+        document.addEventListener('msfullscreenchange', () => this.updateFullscreenCheckbox());
     }
 
     /**
@@ -57,7 +62,18 @@ class SettingsUI {
         const settings = SaveSystem.loadSettings();
         this.soundToggle.checked = !!settings.soundEnabled;
         this.timerToggle.checked = !!settings.timerEnabled;
-        this.fullscreenToggle.checked = settings.fullscreenEnabled !== false; // Default true
+        this.updateFullscreenCheckbox();
+    }
+
+    /**
+     * Update fullscreen checkbox to match actual fullscreen state
+     */
+    updateFullscreenCheckbox() {
+        const isFullscreen = document.fullscreenElement || 
+                            document.webkitFullscreenElement || 
+                            document.mozFullScreenElement || 
+                            document.msFullscreenElement;
+        this.fullscreenToggle.checked = !!isFullscreen;
     }
 
     /**

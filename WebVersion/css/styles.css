@@ -373,7 +373,7 @@ h3 {
 .grid-wrapper {
     background: white;
     border-radius: 10px;
-    padding: 15px;
+    padding: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
@@ -384,7 +384,7 @@ h3 {
 
 .word-grid {
     display: grid;
-    gap: 4px;
+    gap: 3px;
     user-select: none;
     touch-action: none;
     max-width: 100%;
@@ -399,14 +399,14 @@ h3 {
     align-items: center;
     background: #ecf0f1;
     border: 2px solid #bdc3c7;
-    border-radius: 8px;
-    font-size: clamp(0.7em, 1.2em, 2vw);
+    border-radius: 6px;
+    font-size: clamp(0.6em, 1em, 1.8vw);
     font-weight: bold;
     color: var(--dark-bg);
     cursor: pointer;
     transition: all 0.2s ease;
-    width: clamp(22px, 7vw, 60px);
-    height: clamp(22px, 7vw, 60px);
+    width: clamp(20px, 6.5vw, 45px);
+    height: clamp(20px, 6.5vw, 45px);
 }
 
 .grid-cell:hover {

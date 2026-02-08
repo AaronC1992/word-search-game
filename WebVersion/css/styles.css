@@ -403,10 +403,10 @@ h3 {
     gap: 2px;
     user-select: none;
     touch-action: none;
-    width: min(85vh, 85vw);
-    height: min(85vh, 85vw);
-    max-width: 800px;
-    max-height: 800px;
+    width: min(calc(100dvh - 140px), calc(100vw - 380px));
+    height: min(calc(100dvh - 140px), calc(100vw - 380px));
+    max-width: 700px;
+    max-height: 700px;
     margin: 0 auto;
     overflow: visible;
     place-self: center;
@@ -420,7 +420,8 @@ h3 {
     background: #ecf0f1;
     border: 2px solid #bdc3c7;
     border-radius: 8px;
-    font-size: 65%;
+    font-size: 2em;
+    line-height: 1;
     font-weight: bold;
     color: var(--dark-bg);
     cursor: pointer;
@@ -795,12 +796,14 @@ h3 {
     }
     
     .word-grid {
-        width: min(80vh, 80vw);
-        height: min(80vh, 80vw);
+        width: min(calc(100dvh - 140px), calc(100vw - 320px));
+        height: min(calc(100dvh - 140px), calc(100vw - 320px));
+        max-width: 650px;
+        max-height: 650px;
     }
     
     .grid-cell {
-        font-size: 60%;
+        font-size: 1.8em;
         border-radius: 6px;
     }
 }
@@ -854,12 +857,14 @@ h3 {
     
     .word-grid {
         gap: 2px;
-        width: min(75vh, 75vw);
-        height: min(75vh, 75vw);
+        width: min(calc(100dvh - 140px), calc(100vw - 280px));
+        height: min(calc(100dvh - 140px), calc(100vw - 280px));
+        max-width: 600px;
+        max-height: 600px;
     }
     
     .grid-cell {
-        font-size: 58%;
+        font-size: 1.6em;
         border-radius: 4px;
     }
     
@@ -915,12 +920,14 @@ h3 {
     
     .word-grid {
         gap: 1px;
-        width: min(70vh, 85vw);
-        height: min(70vh, 85vw);
+        width: min(calc(100dvh - 200px), calc(100vw - 40px));
+        height: min(calc(100dvh - 200px), calc(100vw - 40px));
+        max-width: 500px;
+        max-height: 500px;
     }
     
     .grid-cell {
-        font-size: 55%;
+        font-size: 1.4em;
         border-width: 1px;
         border-radius: 3px;
     }

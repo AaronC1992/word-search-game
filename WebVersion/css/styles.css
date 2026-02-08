@@ -340,9 +340,9 @@ h3 {
 /* ===== Gameplay Screen ===== */
 .game-container {
     width: 100%;
-    max-width: 1400px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
+    padding: 15px;
 }
 
 .top-bar {
@@ -364,8 +364,8 @@ h3 {
 
 .game-content {
     display: grid;
-    grid-template-columns: 1fr 300px;
-    gap: 20px;
+    grid-template-columns: 1fr 280px;
+    gap: 15px;
     margin-bottom: 20px;
 }
 
@@ -384,13 +384,14 @@ h3 {
 
 .word-grid {
     display: grid;
-    gap: 4px;
+    gap: 3px;
     user-select: none;
     touch-action: none;
     max-width: 100%;
     width: fit-content;
     margin: 0 auto;
     overflow: visible;
+    place-self: center;
 }
 
 .grid-cell {
@@ -401,13 +402,13 @@ h3 {
     background: #ecf0f1;
     border: 2px solid #bdc3c7;
     border-radius: 8px;
-    font-size: clamp(0.7em, 1.2em, 2vw);
+    font-size: clamp(0.6em, 0.9em, 1.3vw);
     font-weight: bold;
     color: var(--dark-bg);
     cursor: pointer;
     transition: all 0.2s ease;
-    width: clamp(25px, 8vw, 60px);
-    height: clamp(25px, 8vw, 60px);
+    width: clamp(18px, 5.5vw, 40px);
+    height: clamp(18px, 5.5vw, 40px);
 }
 
 .grid-cell:hover {
@@ -570,7 +571,8 @@ h3 {
     padding: 20px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
-    max-height: 500px;
+    max-height: 400px;
+    min-height: 150px;
 }
 
 /* Hide scrollbars while maintaining scroll functionality */
@@ -766,11 +768,17 @@ h3 {
 /* ===== Responsive Design ===== */
 @media (max-width: 1024px) {
     .game-content {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 250px;
     }
     
     .word-list-panel {
-        max-height: 250px;
+        max-height: 300px;
+    }
+    
+    .grid-cell {
+        font-size: clamp(0.5em, 0.8em, 1.1vw);
+        width: clamp(18px, 5.5vw, 40px);
+        height: clamp(18px, 5.5vw, 40px);
     }
 }
 
@@ -807,6 +815,15 @@ h3 {
         grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
     }
     
+    .game-content {
+        grid-template-columns: 1fr 200px;
+        gap: 15px;
+    }
+    
+    .word-list-panel {
+        max-height: 250px;
+    }
+    
     .grid-wrapper {
         padding: 10px;
         overflow: visible;
@@ -817,9 +834,9 @@ h3 {
     }
     
     .grid-cell {
-        font-size: clamp(0.6em, 1em, 1.5vw);
-        width: clamp(20px, 6vw, 45px);
-        height: clamp(20px, 6vw, 45px);
+        font-size: clamp(0.5em, 0.75em, 1.1vw);
+        width: clamp(18px, 5vw, 40px);
+        height: clamp(18px, 5vw, 40px);
         border-radius: 4px;
     }
     
@@ -856,6 +873,16 @@ h3 {
         padding: 10px;
     }
     
+    .game-content {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .word-list-panel {
+        max-height: 200px;
+        order: -1;
+    }
+    
     .grid-wrapper {
         padding: 8px;
         border-radius: 5px;
@@ -867,9 +894,9 @@ h3 {
     }
     
     .grid-cell {
-        font-size: clamp(0.5em, 0.75em, 1.2vw);
-        width: clamp(18px, 5vw, 40px);
-        height: clamp(18px, 5vw, 40px);
+        font-size: clamp(0.45em, 0.65em, 1vw);
+        width: clamp(16px, 4.5vw, 35px);
+        height: clamp(16px, 4.5vw, 35px);
         border-width: 1px;
         border-radius: 3px;
     }

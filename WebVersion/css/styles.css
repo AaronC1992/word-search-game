@@ -423,8 +423,8 @@ h3 {
     color: var(--dark-bg);
     cursor: pointer;
     transition: all 0.2s ease;
-    width: clamp(12px, 2.8vmin, 28px);
-    height: clamp(12px, 2.8vmin, 28px);
+    width: var(--cell-size, clamp(12px, 3.2vmin, 36px));
+    height: var(--cell-size, clamp(12px, 3.2vmin, 36px));
 }
 
 .grid-cell:hover {
@@ -794,8 +794,8 @@ h3 {
     
     .grid-cell {
         font-size: clamp(0.55em, 0.85em, 1.2vmin);
-        width: clamp(12px, 2.6vmin, 26px);
-        height: clamp(12px, 2.6vmin, 26px);
+        width: var(--cell-size, clamp(12px, 3vmin, 32px));
+        height: var(--cell-size, clamp(12px, 3vmin, 32px));
     }
 }
 
@@ -852,8 +852,8 @@ h3 {
     
     .grid-cell {
         font-size: clamp(0.5em, 0.75em, 1.1vmin);
-        width: clamp(12px, 2.6vmin, 26px);
-        height: clamp(12px, 2.6vmin, 26px);
+        width: var(--cell-size, clamp(12px, 2.8vmin, 30px));
+        height: var(--cell-size, clamp(12px, 2.8vmin, 30px));
         border-radius: 4px;
     }
     
@@ -913,8 +913,8 @@ h3 {
     
     .grid-cell {
         font-size: clamp(0.45em, 0.7em, 1vmin);
-        width: clamp(11px, 2.4vmin, 24px);
-        height: clamp(11px, 2.4vmin, 24px);
+        width: var(--cell-size, clamp(11px, 2.6vmin, 28px));
+        height: var(--cell-size, clamp(11px, 2.6vmin, 28px));
         border-width: 1px;
         border-radius: 3px;
     }

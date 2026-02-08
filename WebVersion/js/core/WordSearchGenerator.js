@@ -56,6 +56,9 @@ class WordSearchGenerator {
                 
                 // Try to place bonus words
                 this.placeBonusWords(puzzle, levelDef);
+
+                // Detect coincidental words already in the grid
+                this.detectCoincidentalBonusWords(puzzle, levelDef);
                 
                 return puzzle;
             }
@@ -187,6 +190,112 @@ class WordSearchGenerator {
             const col = startCol + (direction.y * i);
             puzzle.setChar(row, col, word[i]);
         }
+    }
+
+    /**
+     * Detect and register words that appear in the filled grid by coincidence
+     * @param {PuzzleData} puzzle - Current puzzle
+     * @param {LevelDefinition} levelDef - Level configuration
+     */
+    detectCoincidentalBonusWords(puzzle, levelDef) {
+        const minLen = Math.max(4, levelDef.minWordLength || 3);
+        const maxLen = Math.max(minLen, levelDef.maxWordLength || 12);
+        const maxBonus = Math.min(12, Math.floor((puzzle.gridSize * puzzle.gridSize) / 10));
+
+        const { wordSet, prefixSet } = this.buildWordLookup(minLen, maxLen);
+        const existingWords = new Set(
+            [...puzzle.targetWords, ...puzzle.bonusWordPlacements.map(p => p.word)].map(w => w.toUpperCase())
+        );
+
+        const directions = this.getScanDirections();
+        let added = 0;
+
+        for (let row = 0; row < puzzle.gridSize; row++) {
+            for (let col = 0; col < puzzle.gridSize; col++) {
+                for (const direction of directions) {
+                    let word = '';
+
+                    for (let i = 0; i < maxLen; i++) {
+                        const r = row + (direction.x * i);
+                        const c = col + (direction.y * i);
+
+                        if (r < 0 || r >= puzzle.gridSize || c < 0 || c >= puzzle.gridSize) {
+                            break;
+                        }
+
+                        word += puzzle.getChar(r, c);
+
+                        if (!prefixSet.has(word)) {
+                            break;
+                        }
+
+                        if (word.length >= minLen && wordSet.has(word) && !existingWords.has(word)) {
+                            this.registerBonusPlacement(puzzle, word, row, col, direction);
+                            existingWords.add(word);
+                            added++;
+
+                            if (added >= maxBonus) {
+                                return;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Register a bonus word placement without modifying the grid
+     * @param {PuzzleData} puzzle - Current puzzle
+     * @param {string} word - Word to register
+     * @param {number} startRow - Starting row
+     * @param {number} startCol - Starting column
+     * @param {Object} direction - Direction vector {x, y}
+     */
+    registerBonusPlacement(puzzle, word, startRow, startCol, direction) {
+        const placement = new WordPlacement(word, startRow, startCol, direction);
+        puzzle.bonusWordPlacements.push(placement);
+    }
+
+    /**
+     * Build word and prefix lookups for fast scanning
+     * @param {number} minLen - Minimum word length
+     * @param {number} maxLen - Maximum word length
+     * @returns {Object} {wordSet, prefixSet}
+     */
+    buildWordLookup(minLen, maxLen) {
+        const wordSet = new Set();
+        const prefixSet = new Set();
+        const allWords = [...WordList.shortWords, ...WordList.mediumWords, ...WordList.longWords];
+
+        for (const rawWord of allWords) {
+            const word = rawWord.toUpperCase();
+            if (word.length < minLen || word.length > maxLen) continue;
+
+            wordSet.add(word);
+            for (let i = 1; i <= word.length; i++) {
+                prefixSet.add(word.slice(0, i));
+            }
+        }
+
+        return { wordSet, prefixSet };
+    }
+
+    /**
+     * Get all straight-line scan directions (8 directions)
+     * @returns {Array} Direction vectors {x, y}
+     */
+    getScanDirections() {
+        return [
+            {x: 0, y: 1},   // Right
+            {x: 0, y: -1},  // Left
+            {x: 1, y: 0},   // Down
+            {x: -1, y: 0},  // Up
+            {x: 1, y: 1},   // Down-Right
+            {x: 1, y: -1},  // Down-Left
+            {x: -1, y: 1},  // Up-Right
+            {x: -1, y: -1}  // Up-Left
+        ];
     }
 
     /**

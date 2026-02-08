@@ -76,7 +76,6 @@ class WinScreenUI {
             // Single player modes
             document.getElementById('completion-time').textContent = timeText;
             document.getElementById('words-found').textContent = `${this.stats.wordsFound}/${this.stats.totalWords}`;
-            document.getElementById('hints-used').textContent = this.stats.hintsUsed;
 
             // Calculate stars (campaign only)
             if (gameManager.currentGameMode === 'campaign') {

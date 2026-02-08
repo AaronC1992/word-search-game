@@ -20,10 +20,6 @@ class GameplayUI {
             this.pauseGame();
         });
 
-        document.getElementById('hint-btn').addEventListener('click', () => {
-            this.useHint();
-        });
-
         document.getElementById('reset-btn').addEventListener('click', () => {
             this.resetPuzzle();
         });
@@ -302,26 +298,7 @@ class GameplayUI {
         pauseBtn.textContent = gameManager.isPaused ? '▶️ Resume' : '⏸️ Pause';
     }
 
-    /**
-     * Use hint
-     */
-    useHint() {
-        const gameManager = window.app.gameManager;
-        const hintWord = gameManager.useHint();
 
-        if (hintWord) {
-            // Highlight hint word in list
-            const wordElement = this.wordListContainer.querySelector(`[data-word="${hintWord}"]`);
-            if (wordElement) {
-                wordElement.classList.add('hint');
-                setTimeout(() => {
-                    wordElement.classList.remove('hint');
-                }, 2000);
-            }
-
-            console.log(`Hint: Look for "${hintWord}"`);
-        }
-    }
 
     /**
      * Reset puzzle

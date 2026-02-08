@@ -123,7 +123,6 @@ class SaveSystem {
         return {
             soundEnabled: true,
             musicEnabled: true,
-            hintsEnabled: true,
             timerEnabled: true
         };
     }

@@ -8,6 +8,7 @@ class InputController {
         this.isDragging = false;
         this.selectedCells = [];
         this.lastSelectedCell = null;
+        this.selectionDirection = null; // Locked direction: {dx, dy}
 
         // Callbacks
         this.onSelectionChanged = null;
@@ -55,6 +56,7 @@ class InputController {
         this.isDragging = true;
         this.selectedCells = [];
         this.lastSelectedCell = null;
+        this.selectionDirection = null; // Reset direction on new selection
 
         this.addCellToSelection(cell);
     }
@@ -76,8 +78,16 @@ class InputController {
             cellCoords.x !== this.lastSelectedCell.x || 
             cellCoords.y !== this.lastSelectedCell.y) {
 
-            // Check if adjacent to last selected cell
-            if (this.selectedCells.length === 0 || this.isAdjacent(this.lastSelectedCell, cellCoords)) {
+            // On second cell selection, establish the direction
+            if (this.selectedCells.length === 1 && !this.selectionDirection) {
+                const direction = this.getDirection(this.lastSelectedCell, cellCoords);
+                if (direction) {
+                    this.selectionDirection = direction;
+                }
+            }
+
+            // Check if movement follows the locked direction
+            if (this.isValidMove(this.lastSelectedCell, cellCoords)) {
                 // Check if already in selection (backtracking)
                 const existingIndex = this.selectedCells.findIndex(c => 
                     c.x === cellCoords.x && c.y === cellCoords.y
@@ -152,6 +162,49 @@ class InputController {
             x: parseInt(cell.dataset.row),
             y: parseInt(cell.dataset.col)
         };
+    }
+
+    /**
+     * Calculate normalized direction vector from one cell to another
+     * @param {Object} from - {x, y} starting coordinates
+     * @param {Object} to - {x, y} ending coordinates
+     * @returns {Object|null} {dx, dy} normalized direction or null if same cell
+     */
+    getDirection(from, to) {
+        const dx = to.x - from.x;
+        const dy = to.y - from.y;
+
+        if (dx === 0 && dy === 0) return null;
+
+        // Normalize to -1, 0, or 1
+        const normDx = dx === 0 ? 0 : (dx > 0 ? 1 : -1);
+        const normDy = dy === 0 ? 0 : (dy > 0 ? 1 : -1);
+
+        return { dx: normDx, dy: normDy };
+    }
+
+    /**
+     * Check if move from lastCell to newCell is valid given the locked direction
+     * @param {Object} lastCell - {x, y} current position
+     * @param {Object} newCell - {x, y} target position
+     * @returns {boolean} True if move follows locked direction
+     */
+    isValidMove(lastCell, newCell) {
+        // First move - always valid
+        if (!this.selectionDirection) {
+            return this.isAdjacent(lastCell, newCell);
+        }
+
+        const direction = this.getDirection(lastCell, newCell);
+        if (!direction) return false;
+
+        // Check if direction matches locked direction or reverse
+        const matchesForward = direction.dx === this.selectionDirection.dx && 
+                               direction.dy === this.selectionDirection.dy;
+        const matchesReverse = direction.dx === -this.selectionDirection.dx && 
+                               direction.dy === -this.selectionDirection.dy;
+
+        return matchesForward || matchesReverse;
     }
 
     /**

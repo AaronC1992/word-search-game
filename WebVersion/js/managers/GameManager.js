@@ -12,7 +12,6 @@ class GameManager {
         this.startTime = null;
         this.elapsedTime = 0;
         this.isPaused = false;
-        this.hintsUsed = 0;
 
         // Two player mode
         this.twoPlayerMode = false;
@@ -45,7 +44,6 @@ class GameManager {
         this.startTime = null;
         this.elapsedTime = 0;
         this.isPaused = false;
-        this.hintsUsed = 0;
         this.twoPlayerMode = false;
         this.inputController = null;
         this.onWordFound = null;
@@ -265,22 +263,7 @@ class GameManager {
         }
     }
 
-    /**
-     * Use a hint
-     * @returns {string} Hint word or null
-     */
-    useHint() {
-        const remainingWords = this.currentPuzzle.targetWords.filter(
-            word => !this.foundWords.includes(word)
-        );
 
-        if (remainingWords.length > 0) {
-            this.hintsUsed++;
-            return remainingWords[0];
-        }
-
-        return null;
-    }
 
     /**
      * Reset current puzzle

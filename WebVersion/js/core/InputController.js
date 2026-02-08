@@ -40,8 +40,10 @@ class InputController {
         }, {passive: false});
 
         document.addEventListener('touchend', (e) => {
-            e.preventDefault();
-            this.handleEnd(e);
+            if (this.isDragging) {
+                e.preventDefault();
+                this.handleEnd(e);
+            }
         });
     }
 

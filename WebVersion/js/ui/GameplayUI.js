@@ -189,42 +189,59 @@ class GameplayUI {
      * Handle word found
      * @param {string} word - Found word
      * @param {number} playerNumber - Player number (for two player mode)
+     * @param {boolean} isBonus - Whether this is a bonus word
      */
-    onWordFound(word, playerNumber) {
-        // Mark word in list
-        const wordElement = this.wordListContainer.querySelector(`[data-word="${word}"]`);
-        if (wordElement) {
-            wordElement.classList.add('found');
-            if (playerNumber === 1) {
-                wordElement.classList.add('player1-found');
-            } else if (playerNumber === 2) {
-                wordElement.classList.add('player2-found');
-            }
-        }
-
-        // Highlight cells permanently
-        const gameManager = window.app.gameManager;
-        const placement = gameManager.currentPuzzle.wordPlacements.find(p => p.word === word);
-        
-        if (placement) {
-            placement.coordinates.forEach(coord => {
-                const cellElement = this.getCellElement(coord.x, coord.y);
-                if (cellElement) {
-                    cellElement.classList.remove('selecting');
-                    cellElement.classList.add('found');
-                    if (playerNumber === 1) {
-                        cellElement.classList.add('player1-found');
-                    } else if (playerNumber === 2) {
-                        cellElement.classList.add('player2-found');
+    onWordFound(word, playerNumber, isBonus = false) {
+        if (isBonus) {
+            // Highlight bonus word cells in gold
+            const gameManager = window.app.gameManager;
+            const placement = gameManager.currentPuzzle.bonusWordPlacements.find(p => p.word === word);
+            
+            if (placement) {
+                placement.coordinates.forEach(coord => {
+                    const cellElement = this.getCellElement(coord.x, coord.y);
+                    if (cellElement) {
+                        cellElement.classList.remove('selecting');
+                        cellElement.classList.add('bonus-found');
                     }
+                });
+            }
+        } else {
+            // Mark regular word in list
+            const wordElement = this.wordListContainer.querySelector(`[data-word="${word}"]`);
+            if (wordElement) {
+                wordElement.classList.add('found');
+                if (playerNumber === 1) {
+                    wordElement.classList.add('player1-found');
+                } else if (playerNumber === 2) {
+                    wordElement.classList.add('player2-found');
                 }
-            });
-        }
+            }
 
-        this.updateProgress();
+            // Highlight cells permanently
+            const gameManager = window.app.gameManager;
+            const placement = gameManager.currentPuzzle.wordPlacements.find(p => p.word === word);
+            
+            if (placement) {
+                placement.coordinates.forEach(coord => {
+                    const cellElement = this.getCellElement(coord.x, coord.y);
+                    if (cellElement) {
+                        cellElement.classList.remove('selecting');
+                        cellElement.classList.add('found');
+                        if (playerNumber === 1) {
+                            cellElement.classList.add('player1-found');
+                        } else if (playerNumber === 2) {
+                            cellElement.classList.add('player2-found');
+                        }
+                    }
+                });
+            }
+
+            this.updateProgress();
+        }
 
         // Play sound effect (if implemented)
-        console.log(`Word found: ${word}${playerNumber ? ' by Player ' + playerNumber : ''}`);
+        console.log(`Word found: ${word}${playerNumber ? ' by Player ' + playerNumber : ''}${isBonus ? ' (BONUS!)' : ''}`);
     }
 
     /**

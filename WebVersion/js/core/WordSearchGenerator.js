@@ -53,6 +53,10 @@ class WordSearchGenerator {
             if (allPlaced) {
                 // Fill remaining cells
                 this.fillEmptyCells(puzzle);
+                
+                // Try to place bonus words
+                this.placeBonusWords(puzzle, levelDef);
+                
                 return puzzle;
             }
         }
@@ -108,6 +112,81 @@ class WordSearchGenerator {
         }
 
         return this.generatePuzzle(levelDef, forcedSeed);
+    }
+
+    /**
+     * Place bonus words (hidden words not in word list)
+     * @param {PuzzleData} puzzle - Current puzzle
+     * @param {LevelDefinition} levelDef - Level configuration
+     */
+    placeBonusWords(puzzle, levelDef) {
+        // Calculate how many bonus words to try (1-3 based on grid size)
+        const bonusAttempts = Math.min(3, Math.floor(levelDef.gridSize / 8));
+        
+        for (let i = 0; i < bonusAttempts; i++) {
+            // Get a random word not already in the puzzle
+            const existingWords = puzzle.targetWords.map(w => w.toUpperCase());
+            let bonusWord = null;
+            let attempts = 0;
+            
+            while (!bonusWord && attempts < 20) {
+                const randomWord = WordList.getRandomWords(1, 4, 8, Math.random())[0];
+                if (!existingWords.includes(randomWord.toUpperCase())) {
+                    bonusWord = randomWord;
+                }
+                attempts++;
+            }
+            
+            if (!bonusWord) continue;
+            
+            // Try to place the bonus word
+            const allowedDirections = levelDef.getAllowedDirections();
+            const placed = this.tryPlaceBonusWord(puzzle, bonusWord, allowedDirections);
+            
+            if (!placed) {
+                // Failed to place this bonus word, try next one
+                continue;
+            }
+        }
+    }
+
+    /**
+     * Try to place a bonus word in the grid
+     * @param {PuzzleData} puzzle - Current puzzle
+     * @param {string} word - Word to place
+     * @param {Array} allowedDirections - Allowed direction vectors
+     * @returns {boolean} True if placed successfully
+     */
+    tryPlaceBonusWord(puzzle, word, allowedDirections) {
+        word = word.toUpperCase();
+
+        const placements = this.getAllValidPlacements(puzzle, word, allowedDirections);
+        if (placements.length === 0) {
+            return false;
+        }
+
+        const choice = placements[Math.floor(this.random() * placements.length)];
+        this.placeBonusWord(puzzle, word, choice.startRow, choice.startCol, choice.direction);
+        return true;
+    }
+
+    /**
+     * Place bonus word in the grid (as WordPlacement but tracked separately)
+     * @param {PuzzleData} puzzle - Current puzzle
+     * @param {string} word - Word to place
+     * @param {number} startRow - Starting row
+     * @param {number} startCol - Starting column
+     * @param {Object} direction - Direction vector {x, y}
+     */
+    placeBonusWord(puzzle, word, startRow, startCol, direction) {
+        const placement = new WordPlacement(word, startRow, startCol, direction);
+        puzzle.bonusWordPlacements.push(placement);
+
+        for (let i = 0; i < word.length; i++) {
+            const row = startRow + (direction.x * i);
+            const col = startCol + (direction.y * i);
+            puzzle.setChar(row, col, word[i]);
+        }
     }
 
     /**

@@ -374,6 +374,14 @@ h3 {
     color: white;
 }
 
+.grid-cell.bonus-found {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    border-color: #FF8C00;
+    color: #333;
+    box-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+    font-weight: bold;
+}
+
 /* ===== Word List Panel ===== */
 .word-list-panel {
     background: white;

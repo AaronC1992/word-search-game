@@ -77,6 +77,14 @@ class WinScreenUI {
             document.getElementById('completion-time').textContent = timeText;
             document.getElementById('words-found').textContent = `${this.stats.wordsFound}/${this.stats.totalWords}`;
 
+            // Display bonus words if any were found
+            if (this.stats.bonusWordsFound > 0) {
+                const statsDiv = document.querySelector('.win-stats');
+                const bonusDiv = document.createElement('p');
+                bonusDiv.innerHTML = `<span style="color: gold;">★ Bonus Words: ${this.stats.bonusWordsFound} (+${this.stats.bonusPoints} points)</span>`;
+                statsDiv.appendChild(bonusDiv);
+            }
+
             // Calculate stars (campaign only)
             if (gameManager.currentGameMode === 'campaign') {
                 const stars = this.calculateStars(this.stats.time);

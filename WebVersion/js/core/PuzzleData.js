@@ -8,6 +8,7 @@ class PuzzleData {
         this.grid = Array(gridSize).fill(null).map(() => Array(gridSize).fill(''));
         this.wordPlacements = [];
         this.targetWords = [];
+        this.bonusWordPlacements = []; // Hidden bonus words
         this.seed = seed || Math.floor(Math.random() * 1000000);
     }
 
@@ -45,6 +46,7 @@ class PuzzleData {
             gridSize: this.gridSize,
             grid: this.grid,
             wordPlacements: this.wordPlacements.map(wp => wp.toJSON()),
+            bonusWordPlacements: this.bonusWordPlacements.map(wp => wp.toJSON()),
             targetWords: this.targetWords,
             seed: this.seed
         };
@@ -59,6 +61,7 @@ class PuzzleData {
         const puzzle = new PuzzleData(json.gridSize, json.seed);
         puzzle.grid = json.grid;
         puzzle.wordPlacements = json.wordPlacements.map(wp => WordPlacement.fromJSON(wp));
+        puzzle.bonusWordPlacements = json.bonusWordPlacements ? json.bonusWordPlacements.map(wp => WordPlacement.fromJSON(wp)) : [];
         puzzle.targetWords = json.targetWords;
         return puzzle;
     }

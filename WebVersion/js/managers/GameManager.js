@@ -6,6 +6,7 @@ class GameManager {
     constructor() {
         this.currentPuzzle = null;
         this.foundWords = [];
+        this.bonusWordsFound = [];
         this.currentGameMode = null; // 'campaign', 'quickplay', or 'twoplayer'
         this.currentLevelNumber = null;
         this.currentDifficulty = null;
@@ -35,6 +36,7 @@ class GameManager {
         this.stopTimer();
         this.currentPuzzle = null;
         this.foundWords = [];
+        this.bonusWordsFound = [];
         this.player1Words = [];
         this.player2Words = [];
         this.pendingSelection = null;
@@ -165,7 +167,7 @@ class GameManager {
     processSelection(selectedCells) {
         if (selectedCells.length < 2) return;
 
-        // Check each word placement
+        // Check regular word placements first
         for (const placement of this.currentPuzzle.wordPlacements) {
             if (this.foundWords.includes(placement.word)) continue;
 
@@ -174,7 +176,8 @@ class GameManager {
                     // Store selection and wait for player identification
                     this.pendingSelection = {
                         word: placement.word,
-                        cells: selectedCells
+                        cells: selectedCells,
+                        isBonus: false
                     };
                     if (this.onPlayerSelectNeeded) {
                         this.onPlayerSelectNeeded(placement.word);
@@ -182,6 +185,17 @@ class GameManager {
                 } else {
                     this.markWordAsFound(placement.word);
                 }
+                return;
+            }
+        }
+
+        // Check bonus word placements
+        for (const placement of this.currentPuzzle.bonusWordPlacements) {
+            if (this.bonusWordsFound.includes(placement.word)) continue;
+
+            if (placement.matchesSelection(selectedCells)) {
+                // Found a bonus word
+                this.markBonusWordAsFound(placement.word);
                 return;
             }
         }
@@ -216,12 +230,26 @@ class GameManager {
             this.foundWords.push(word);
 
             if (this.onWordFound) {
-                this.onWordFound(word, playerNumber);
+                this.onWordFound(word, playerNumber, false);
             }
 
             // Check if puzzle complete
             if (this.foundWords.length === this.currentPuzzle.targetWords.length) {
                 this.completePuzzle();
+            }
+        }
+    }
+
+    /**
+     * Mark bonus word as found
+     * @param {string} word - Found bonus word
+     */
+    markBonusWordAsFound(word) {
+        if (!this.bonusWordsFound.includes(word)) {
+            this.bonusWordsFound.push(word);
+
+            if (this.onWordFound) {
+                this.onWordFound(word, null, true); // true indicates bonus word
             }
         }
     }
@@ -246,9 +274,10 @@ class GameManager {
         if (this.onPuzzleComplete) {
             const stats = {
                 time: this.elapsedTime,
-                hintsUsed: this.hintsUsed,
                 wordsFound: this.foundWords.length,
-                totalWords: this.currentPuzzle.targetWords.length
+                totalWords: this.currentPuzzle.targetWords.length,
+                bonusWordsFound: this.bonusWordsFound.length,
+                bonusPoints: this.bonusWordsFound.length * 10
             };
 
             // Add two player stats if applicable
@@ -270,11 +299,11 @@ class GameManager {
      */
     resetPuzzle() {
         this.foundWords = [];
+        this.bonusWordsFound = [];
         this.player1Words = [];
         this.player2Words = [];
         this.pendingSelection = null;
         this.elapsedTime = 0;
-        this.hintsUsed = 0;
         this.startTimer();
     }
 

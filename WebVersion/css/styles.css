@@ -378,7 +378,7 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: auto;
+    overflow: hidden;
     max-height: 70vh;
 }
 

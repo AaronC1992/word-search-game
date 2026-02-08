@@ -63,6 +63,13 @@ body {
     height: 100vh;
 }
 
+/* Widescreen Background */
+@media (min-aspect-ratio: 4/3) {
+    #main-menu-screen {
+        background-image: url('../assets/background-widescreen.png');
+    }
+}
+
 #main-menu-screen::before {
     content: '';
     position: absolute;

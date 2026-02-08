@@ -207,6 +207,8 @@ class WordSearchGenerator {
             [...puzzle.targetWords, ...puzzle.bonusWordPlacements.map(p => p.word)].map(w => w.toUpperCase())
         );
 
+        console.log(`🔍 Scanning for bonus words... Dictionary size: ${wordSet.size}, Min/Max length: ${minLen}/${maxLen}, Max bonus: ${maxBonus}`);
+
         const directions = this.getScanDirections();
         let added = 0;
 
@@ -231,10 +233,12 @@ class WordSearchGenerator {
 
                         if (word.length >= minLen && wordSet.has(word) && !existingWords.has(word)) {
                             this.registerBonusPlacement(puzzle, word, row, col, direction);
+                            console.log(`✨ Found bonus word: "${word}" at (${row},${col}) going ${this.directionName(direction)}`);
                             existingWords.add(word);
                             added++;
 
                             if (added >= maxBonus) {
+                                console.log(`🎯 Reached max bonus limit (${maxBonus})`);
                                 return;
                             }
                         }
@@ -242,6 +246,7 @@ class WordSearchGenerator {
                 }
             }
         }
+        console.log(`✅ Bonus detection complete. Found ${added} bonus words total.`);
     }
 
     /**
@@ -293,7 +298,25 @@ class WordSearchGenerator {
             {x: -1, y: 0},  // Up
             {x: 1, y: 1},   // Down-Right
             {x: 1, y: -1},  // Down-Left
-            {x: -1, y: 1},  // Up-Right
+     
+
+    /**
+     * Get direction name for debugging
+     * @param {Object} direction - Direction vector {x, y}
+     * @returns {string} Direction name
+     */
+    directionName(direction) {
+        const { x, y } = direction;
+        if (x === 0 && y === 1) return 'Right';
+        if (x === 0 && y === -1) return 'Left';
+        if (x === 1 && y === 0) return 'Down';
+        if (x === -1 && y === 0) return 'Up';
+        if (x === 1 && y === 1) return 'Down-Right';
+        if (x === 1 && y === -1) return 'Down-Left';
+        if (x === -1 && y === 1) return 'Up-Right';
+        if (x === -1 && y === -1) return 'Up-Left';
+        return `(${x},${y})`;
+    }       {x: -1, y: 1},  // Up-Right
             {x: -1, y: -1}  // Up-Left
         ];
     }

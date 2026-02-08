@@ -167,6 +167,12 @@ class GameManager {
     processSelection(selectedCells) {
         if (selectedCells.length < 2) return;
 
+        // Build the selected word for debugging
+        const selectedWord = selectedCells.map(cell => 
+            this.currentPuzzle.getChar(cell.x, cell.y)
+        ).join('');
+        console.log(`🔎 Player selected: "${selectedWord}" (${selectedCells.length} letters)`);
+
         // Check regular word placements first
         for (const placement of this.currentPuzzle.wordPlacements) {
             if (this.foundWords.includes(placement.word)) continue;
@@ -190,15 +196,19 @@ class GameManager {
         }
 
         // Check bonus word placements
+        console.log(`📋 Checking ${this.currentPuzzle.bonusWordPlacements.length} bonus words...`);
         for (const placement of this.currentPuzzle.bonusWordPlacements) {
             if (this.bonusWordsFound.includes(placement.word)) continue;
 
             if (placement.matchesSelection(selectedCells)) {
                 // Found a bonus word
+                console.log(`💰 BONUS MATCH! Found: "${placement.word}"`);
                 this.markBonusWordAsFound(placement.word);
                 return;
             }
         }
+        
+        console.log(`❌ No match found for "${selectedWord}"`);
     }
 
     /**

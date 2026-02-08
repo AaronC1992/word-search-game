@@ -418,7 +418,7 @@ h3 {
     background: #ecf0f1;
     border: 2px solid #bdc3c7;
     border-radius: 8px;
-    font-size: clamp(0.4em, 0.65em, 0.9vmin);
+    font-size: clamp(0.6em, 0.9em, 1.3vmin);
     font-weight: bold;
     color: var(--dark-bg);
     cursor: pointer;
@@ -793,7 +793,7 @@ h3 {
     }
     
     .grid-cell {
-        font-size: clamp(0.42em, 0.6em, 0.85vmin);
+        font-size: clamp(0.55em, 0.85em, 1.2vmin);
         width: clamp(12px, 2.6vmin, 26px);
         height: clamp(12px, 2.6vmin, 26px);
     }
@@ -851,7 +851,7 @@ h3 {
     }
     
     .grid-cell {
-        font-size: clamp(0.42em, 0.6em, 0.85vmin);
+        font-size: clamp(0.5em, 0.75em, 1.1vmin);
         width: clamp(12px, 2.6vmin, 26px);
         height: clamp(12px, 2.6vmin, 26px);
         border-radius: 4px;
@@ -912,7 +912,7 @@ h3 {
     }
     
     .grid-cell {
-        font-size: clamp(0.4em, 0.56em, 0.8vmin);
+        font-size: clamp(0.45em, 0.7em, 1vmin);
         width: clamp(11px, 2.4vmin, 24px);
         height: clamp(11px, 2.4vmin, 24px);
         border-width: 1px;

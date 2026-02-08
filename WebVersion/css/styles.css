@@ -54,9 +54,13 @@ body {
 
 /* Main Menu Background */
 #main-menu-screen {
-    background: url('../assets/background.png') no-repeat center center;
+    background: url('../assets/background.png') no-repeat center center fixed;
     background-size: cover;
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
 }
 
 #main-menu-screen::before {

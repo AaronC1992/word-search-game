@@ -8,25 +8,8 @@ class GameplayUI {
         this.wordListContainer = document.getElementById('word-list');
         this.playerModal = document.getElementById('player-select-modal');
         this.currentSelectionCells = [];
-        this.currentGridSize = null;
         this.initializeButtons();
         this.initializePlayerModal();
-        this.setupResizeHandler();
-    }
-
-    /**
-     * Setup window resize handler for dynamic cell sizing
-     */
-    setupResizeHandler() {
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                if (this.currentGridSize) {
-                    this.setDynamicCellSize(this.currentGridSize);
-                }
-            }, 150);
-        });
     }
 
     /**
@@ -110,6 +93,10 @@ class GameplayUI {
 
         // Start timer update loop
         this.startTimerUpdate();
+
+        // Rescale font on window resize
+        this._resizeHandler = () => this.scaleFontToGrid();
+        window.addEventListener('resize', this._resizeHandler);
     }
 
     /**
@@ -118,11 +105,8 @@ class GameplayUI {
      */
     renderGrid(puzzle) {
         this.gridContainer.innerHTML = '';
-        this.gridContainer.style.gridTemplateColumns = `repeat(${puzzle.gridSize}, 1fr)`;
-
-        // Store current grid size and calculate dynamic cell size
-        this.currentGridSize = puzzle.gridSize;
-        this.setDynamicCellSize(puzzle.gridSize);
+        this.gridContainer.style.gridTemplateColumns = `repeat(${puzzle.gridSize}, minmax(0, 1fr))`;
+        this.gridContainer.style.gridTemplateRows = `repeat(${puzzle.gridSize}, minmax(0, 1fr))`;
 
         for (let row = 0; row < puzzle.gridSize; row++) {
             for (let col = 0; col < puzzle.gridSize; col++) {
@@ -134,42 +118,21 @@ class GameplayUI {
                 this.gridContainer.appendChild(cell);
             }
         }
+
+        // Dynamically set font size after grid renders so letters fill cells
+        requestAnimationFrame(() => this.scaleFontToGrid());
     }
 
     /**
-     * Set dynamic cell size based on grid dimensions
-     * Smaller grids get larger cells to fill available space
-     * @param {number} gridSize - Grid dimensions (e.g., 10, 15, 22)
+     * Scale font size so letters fill grid cells proportionally
      */
-    setDynamicCellSize(gridSize) {
-        // Base calculation using viewport dimensions
-        const vmin = Math.min(window.innerWidth, window.innerHeight);
-        const availableSpace = vmin * 0.75; // ~75% of smaller viewport dimension
-        
-        // Calculate optimal cell size accounting for gaps (2px between cells)
-        const gapTotal = (gridSize - 1) * 2;
-        const targetCellSize = (availableSpace - gapTotal) / gridSize;
-        
-        // Define size ranges based on screen size
-        let minSize = 12;
-        let maxSize = 42;
-        
-        if (window.innerWidth <= 480) {
-            minSize = 11;
-            maxSize = 32;
-        } else if (window.innerWidth <= 768) {
-            minSize = 12;
-            maxSize = 36;
-        } else if (window.innerWidth <= 1024) {
-            minSize = 12;
-            maxSize = 38;
-        }
-        
-        // Clamp to reasonable bounds
-        const cellSize = Math.max(minSize, Math.min(maxSize, targetCellSize));
-        
-        // Apply as CSS custom property
-        this.gridContainer.style.setProperty('--cell-size', `${cellSize}px`);
+    scaleFontToGrid() {
+        const firstCell = this.gridContainer.querySelector('.grid-cell');
+        if (!firstCell) return;
+        const cellSize = firstCell.getBoundingClientRect().width;
+        // Use ~65% of cell width for the font size so letters fill bubbles
+        const fontSize = Math.max(8, cellSize * 0.65);
+        this.gridContainer.style.fontSize = `${fontSize}px`;
     }
 
     /**

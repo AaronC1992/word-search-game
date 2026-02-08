@@ -388,14 +388,14 @@ h3 {
 .grid-wrapper {
     background: white;
     border-radius: 10px;
-    padding: clamp(6px, 1vmin, 12px);
+    padding: clamp(4px, 0.8vmin, 10px);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: visible;
+    overflow: hidden;
     min-height: 0;
-    max-height: 100%;
+    min-width: 0;
 }
 
 .word-grid {
@@ -403,13 +403,10 @@ h3 {
     gap: 2px;
     user-select: none;
     touch-action: none;
-    width: min(calc(100dvh - 500px), calc(100vw - 420px));
-    height: min(calc(100dvh - 500px), calc(100vw - 420px));
-    max-width: 450px;
-    max-height: 450px;
+    width: 100%;
+    height: 100%;
     margin: 0 auto;
-    overflow: visible;
-    place-self: center;
+    overflow: hidden;
 }
 
 .grid-cell {
@@ -420,14 +417,14 @@ h3 {
     background: #ecf0f1;
     border: 2px solid #bdc3c7;
     border-radius: 8px;
-    font-size: 2em;
-    line-height: 1;
     font-weight: bold;
+    line-height: 1;
     color: var(--dark-bg);
     cursor: pointer;
     transition: all 0.2s ease;
-    width: 100%;
-    height: 100%;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
 }
 
 .grid-cell:hover {
@@ -795,15 +792,7 @@ h3 {
         max-height: 100%;
     }
     
-    .word-grid {
-        width: min(calc(100dvh - 500px), calc(100vw - 360px));
-        height: min(calc(100dvh - 500px), calc(100vw - 360px));
-        max-width: 420px;
-        max-height: 420px;
-    }
-    
     .grid-cell {
-        font-size: 1.8em;
         border-radius: 6px;
     }
 }
@@ -811,7 +800,7 @@ h3 {
 /* Mobile landscape orientation */
 @media (max-height: 600px) and (orientation: landscape) {
     .grid-wrapper {
-        overflow: visible;
+        overflow: hidden;
     }
     
     .game-content {
@@ -852,19 +841,14 @@ h3 {
     
     .grid-wrapper {
         padding: 10px;
-        overflow: visible;
+        overflow: hidden;
     }
     
     .word-grid {
         gap: 2px;
-        width: min(calc(100dvh - 500px), calc(100vw - 320px));
-        height: min(calc(100dvh - 500px), calc(100vw - 320px));
-        max-width: 380px;
-        max-height: 380px;
     }
     
     .grid-cell {
-        font-size: 1.6em;
         border-radius: 4px;
     }
     
@@ -915,19 +899,14 @@ h3 {
     .grid-wrapper {
         padding: 8px;
         border-radius: 5px;
-        overflow: visible;
+        overflow: hidden;
     }
     
     .word-grid {
         gap: 1px;
-        width: min(calc(100dvh - 520px), calc(100vw - 50px));
-        height: min(calc(100dvh - 520px), calc(100vw - 50px));
-        max-width: 340px;
-        max-height: 500px;
     }
     
     .grid-cell {
-        font-size: 1.4em;
         border-width: 1px;
         border-radius: 3px;
     }

@@ -318,6 +318,8 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: auto;
+    max-height: 75vh;
 }
 
 .word-grid {
@@ -325,8 +327,9 @@ h3 {
     gap: 4px;
     user-select: none;
     touch-action: none;
-    max-width: 95vw;
-    max-height: 70vh;
+    max-width: 100%;
+    width: fit-content;
+    margin: 0 auto;
 }
 
 .grid-cell {
@@ -342,8 +345,8 @@ h3 {
     color: var(--dark-bg);
     cursor: pointer;
     transition: all 0.2s ease;
-    min-width: 20px;
-    min-height: 20px;
+    width: clamp(25px, 8vw, 60px);
+    height: clamp(25px, 8vw, 60px);
 }
 
 .grid-cell:hover {
@@ -584,6 +587,21 @@ h3 {
     }
 }
 
+/* Mobile landscape orientation */
+@media (max-height: 600px) and (orientation: landscape) {
+    .grid-wrapper {
+        max-height: 80vh;
+    }
+    
+    .game-content {
+        grid-template-columns: 1fr 250px;
+    }
+    
+    .word-list-panel {
+        max-height: 70vh;
+    }
+}
+
 @media (max-width: 768px) {
     .container {
         padding: 30px 20px;
@@ -602,8 +620,20 @@ h3 {
         grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
     }
     
+    .grid-wrapper {
+        padding: 10px;
+        max-height: 65vh;
+    }
+    
+    .word-grid {
+        gap: 2px;
+    }
+    
     .grid-cell {
-        font-size: 1em;
+        font-size: clamp(0.6em, 1em, 1.5vw);
+        width: clamp(20px, 6vw, 45px);
+        height: clamp(20px, 6vw, 45px);
+        border-radius: 4px;
     }
     
     .bottom-controls {
@@ -632,11 +662,34 @@ h3 {
     .top-bar {
         flex-direction: column;
         gap: 10px;
+        padding: 10px 15px;
+    }
+    
+    .game-container {
+        padding: 10px;
+    }
+    
+    .grid-wrapper {
+        padding: 5px;
+        border-radius: 5px;
+        max-height: 60vh;
+    }
+    
+    .word-grid {
+        gap: 1px;
     }
     
     .grid-cell {
-        font-size: 0.9em;
+        font-size: clamp(0.5em, 0.8em, 1.2vw);
+        width: clamp(18px, 5vw, 35px);
+        height: clamp(18px, 5vw, 35px);
         border-width: 1px;
+        border-radius: 3px;
+    }
+    
+    .control-btn {
+        font-size: 0.9em;
+        padding: 10px;
     }
 }
 

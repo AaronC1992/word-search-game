@@ -42,9 +42,6 @@ class WordSearchApp {
         this.winScreenUI = new WinScreenUI();
         this.settingsUI = new SettingsUI();
 
-        // Check fullscreen setting and request if enabled
-        this.checkFullscreenSetting();
-
         // Show main menu
         this.showMainMenu();
 

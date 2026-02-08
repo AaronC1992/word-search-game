@@ -118,7 +118,7 @@ class SaveSystem {
             soundEnabled: true,
             musicEnabled: true,
             timerEnabled: true,
-            fullscreenEnabled: true
+            fullscreenEnabled: false
         };
     }
 

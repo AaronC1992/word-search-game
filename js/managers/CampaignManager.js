@@ -52,7 +52,12 @@ class CampaignManager {
             allowBackward = true;
         }
 
-        return new LevelDefinition(levelNumber, gridSize, wordCount, minWordLength, maxWordLength, allowDiagonal, allowBackward);
+        return new LevelDefinition(levelNumber, gridSize, wordCount, {
+            minWordLength: minWordLength,
+            maxWordLength: maxWordLength,
+            allowDiagonal: allowDiagonal,
+            allowBackward: allowBackward
+        });
     }
 
     /**

@@ -1,5 +1,7 @@
 # Word Search Game - Browser Version
 
+### [▶ Play Now](https://aaronc1992.github.io/word-search-game/)
+
 A complete browser-based 2D Word Search puzzle game with Campaign and Quick Play modes.
 
 ## Features

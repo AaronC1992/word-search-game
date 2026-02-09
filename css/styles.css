@@ -418,7 +418,8 @@ h3 {
     align-items: center;
     background: #ecf0f1;
     border: 1px solid #bdc3c7;
-    border-radius: 6px;
+    border-radius: 50%;
+    aspect-ratio: 1;
     font-weight: bold;
     line-height: 1;
     letter-spacing: 0.5px;
@@ -798,7 +799,7 @@ h3 {
     }
     
     .grid-cell {
-        border-radius: 5px;
+        border-radius: 50%;
     }
     
     .word-item {
@@ -849,7 +850,7 @@ h3 {
     }
 
     .grid-cell {
-        border-radius: 3px;
+        border-radius: 50%;
     }
 
     .word-list-panel {
@@ -954,7 +955,7 @@ h3 {
     }
     
     .grid-cell {
-        border-radius: 4px;
+        border-radius: 50%;
     }
     
     .word-item {
@@ -1045,7 +1046,7 @@ h3 {
     }
     
     .grid-cell {
-        border-radius: 3px;
+        border-radius: 50%;
     }
     
     .bottom-controls {

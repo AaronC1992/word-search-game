@@ -2,6 +2,8 @@
 
 A complete browser-based 2D Word Search puzzle game with Campaign and Quick Play modes.
 
+[![Play Now](https://img.shields.io/badge/Play%20Now-Click%20Here-brightgreen?style=for-the-badge&logo=github)](https://aaronc1992.github.io/word-search-game/)
+
 ## Features
 
 ### Game Modes
@@ -31,32 +33,6 @@ A complete browser-based 2D Word Search puzzle game with Campaign and Quick Play
 - LocalStorage for persistent save data
 - Touch and mouse input support
 - Deterministic puzzle generation using seeds
-
-## How to Run
-
-### Option 1: Direct File Opening
-1. Navigate to the `WebVersion` folder
-2. Double-click `index.html` to open in your default browser
-
-### Option 2: Local Web Server (Recommended)
-Using Python:
-```bash
-cd WebVersion
-python -m http.server 8000
-```
-Then open: http://localhost:8000
-
-Using Node.js (http-server):
-```bash
-cd WebVersion
-npx http-server -p 8000
-```
-Then open: http://localhost:8000
-
-Using VS Code Live Server:
-1. Install "Live Server" extension
-2. Right-click `index.html`
-3. Select "Open with Live Server"
 
 ## How to Play
 

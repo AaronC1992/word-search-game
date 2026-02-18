@@ -416,10 +416,9 @@ h3 {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: #ecf0f1;
-    border: 1px solid #bdc3c7;
-    border-radius: 50%;
-    aspect-ratio: 1;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
     font-weight: bold;
     line-height: 1;
     letter-spacing: 0.5px;
@@ -432,7 +431,7 @@ h3 {
 }
 
 .grid-cell:hover {
-    background: #d5dbdb;
+    background: rgba(0, 0, 0, 0.08);
 }
 
 .grid-cell.selecting {
@@ -799,7 +798,7 @@ h3 {
     }
     
     .grid-cell {
-        border-radius: 50%;
+        border-radius: 5px;
     }
     
     .word-item {
@@ -850,7 +849,7 @@ h3 {
     }
 
     .grid-cell {
-        border-radius: 50%;
+        border-radius: 3px;
     }
 
     .word-list-panel {
@@ -955,7 +954,7 @@ h3 {
     }
     
     .grid-cell {
-        border-radius: 50%;
+        border-radius: 4px;
     }
     
     .word-item {
@@ -1046,7 +1045,7 @@ h3 {
     }
     
     .grid-cell {
-        border-radius: 50%;
+        border-radius: 3px;
     }
     
     .bottom-controls {

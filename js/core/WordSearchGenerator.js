@@ -12,19 +12,16 @@ class WordSearchGenerator {
     generatePuzzle(levelDef, forcedSeed = null) {
         const maxGenerationAttempts = forcedSeed ? 1 : 50;
 
-        let bestAttemptPuzzle = null;
-        let bestPlacedWords = [];
-
-        // Cap max word length to grid size - words longer than the grid can never fit
-        if (levelDef.maxWordLength > levelDef.gridSize) {
-            levelDef.maxWordLength = levelDef.gridSize;
-        }
+        let lastAttemptPuzzle = null;
+        let lastPlacedWords = [];
 
         for (let generationAttempt = 0; generationAttempt < maxGenerationAttempts; generationAttempt++) {
             const seed = forcedSeed || Math.floor(Math.random() * 1000000) + generationAttempt;
             this.random = WordList.createSeededRandom(seed);
 
             const puzzle = new PuzzleData(levelDef.gridSize, seed);
+            lastAttemptPuzzle = puzzle;
+
             // Get words for this level
             const words = WordList.getRandomWords(
                 levelDef.wordCount,
@@ -51,11 +48,7 @@ class WordSearchGenerator {
                 placedWords.push(word);
             }
 
-            // Track the best attempt (most words placed)
-            if (placedWords.length > bestPlacedWords.length) {
-                bestPlacedWords = placedWords;
-                bestAttemptPuzzle = puzzle;
-            }
+            lastPlacedWords = placedWords;
 
             if (allPlaced) {
                 // Fill remaining cells
@@ -71,16 +64,11 @@ class WordSearchGenerator {
             }
         }
 
-        console.warn('Failed to place all words after multiple attempts. Returning best attempt with ' + bestPlacedWords.length + ' words.');
-        if (bestAttemptPuzzle && bestPlacedWords.length > 0) {
-            bestAttemptPuzzle.targetWords = bestPlacedWords;
-            this.fillEmptyCells(bestAttemptPuzzle);
-            
-            // Try to place bonus words on best attempt too
-            this.placeBonusWords(bestAttemptPuzzle, levelDef);
-            this.detectCoincidentalBonusWords(bestAttemptPuzzle, levelDef);
-            
-            return bestAttemptPuzzle;
+        console.warn('Failed to place all words after multiple attempts. Returning a reduced word set.');
+        if (lastAttemptPuzzle) {
+            lastAttemptPuzzle.targetWords = lastPlacedWords;
+            this.fillEmptyCells(lastAttemptPuzzle);
+            return lastAttemptPuzzle;
         }
 
         return null;

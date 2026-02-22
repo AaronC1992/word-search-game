@@ -418,7 +418,7 @@ h3 {
     align-items: center;
     background: transparent;
     border: none;
-    border-radius: 6px;
+    border-radius: 50%;
     font-weight: bold;
     line-height: 1;
     letter-spacing: 0.5px;
